@@ -1,2 +1,0 @@
-# Thang Pang Ern Website
-My Website!
