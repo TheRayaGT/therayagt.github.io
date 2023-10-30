@@ -1,458 +1,248 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Thang Pang Ern</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-		<link rel="manifest" href="/site.webmanifest">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
-	<body class="is-preload">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
 
-		<!-- Header -->
-			<div id="header">
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="/D:\New Website\img\profile_pic.png" style="width:45%;" class="w3-round"><br><br>
+    <h4><b>PORTFOLIO</b></h4>
+    <p class="w3-text-grey">Template by W3.CSS</p>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PORTFOLIO</a> 
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+  </div>
+  <div class="w3-panel w3-large">
+    <a href="https://therayagt.github.io/" target="_blank">
+    <i class="fa fa-github w3-hover-opacity"></i>
+</a>
+    <a href="https://www.instagram.com/thangpangern/" target="_blank">
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+</a>
+    <a href="https://www.linkedin.com/in/thang-pang-ern/" target="_blank">
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+</a>
+  </div>
+</nav>
 
-				<div class="top">
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
-							<h1 id="title">Thang Pang Ern</h1>
-							<p>Aspiring Mathematics Student</p>
-						</div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="#hello" id="hello-link"><span class="icon solid fa-user">Hello</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-file">Portfolio</span></a></li>
-								<li><a href="#research" id="research-link"><span class="icon solid fa-pen-nib">Research</span></a></li>
-								<li><a href="#projects" id="projects-link"><span class="icon solid fa-calculator">Projects</span></a></li>
-								<li><a href="#photography" id="photography-link"><span class="icon solid fa-camera">Photography</span></a></li>
-								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
-							</ul>
-						</nav>
-					</div>
+  <!-- Header -->
+  <header id="portfolio">
+    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+    <h1><b>My Portfolio</b></h1>
+    <div class="w3-section w3-bottombar w3-padding-16">
+      <span class="w3-margin-right">Filter:</span> 
+      <button class="w3-button w3-black">ALL</button>
+      <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
+      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
+      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
+    </div>
+    </div>
+  </header>
+  
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding">
+    <div class="w3-third w3-container w3-margin-bottom">
+      <img src="/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container w3-white">
+        <p><b>Lorem Ipsum</b></p>
+        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-margin-bottom">
+      <img src="/w3images/lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container w3-white">
+        <p><b>Lorem Ipsum</b></p>
+        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container">
+      <img src="/w3images/nature.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container w3-white">
+        <p><b>Lorem Ipsum</b></p>
+        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Second Photo Grid-->
+  <div class="w3-row-padding">
+    <div class="w3-third w3-container w3-margin-bottom">
+      <img src="/w3images/p1.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container w3-white">
+        <p><b>Lorem Ipsum</b></p>
+        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-margin-bottom">
+      <img src="/w3images/p2.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container w3-white">
+        <p><b>Lorem Ipsum</b></p>
+        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      </div>
+    </div>
+    <div class="w3-third w3-container">
+      <img src="/w3images/p3.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container w3-white">
+        <p><b>Lorem Ipsum</b></p>
+        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      </div>
+    </div>
+  </div>
 
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+    </div>
+  </div>
 
-				<div class="bottom">
+  <!-- Images of Me -->
+  <div class="w3-row-padding w3-padding-16" id="about">
+    <div class="w3-col m6">
+      <img src="/w3images/avatar_g.jpg" alt="Me" style="width:100%">
+    </div>
+    <div class="w3-col m6">
+      <img src="/w3images/me2.jpg" alt="Me" style="width:100%">
+    </div>
+  </div>
 
-					<!-- Social Icons -->
-						<ul class="icons">
-							<li><a href="https://www.instagram.com/thangpangern/" class="icon brands fa-instagram" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="label">Instagram</span></a></li>
-							<li><a href="https://www.linkedin.com/in/thang-pang-ern-85448a167/" class="icon brands fa-linkedin" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="label">LinkedIn</span></a></li>
-							<li><a href="https://github.com/TheRayaGT" class="icon brands fa-github" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="label">GitHub</span></a></li>
-							<li><a class="icon solid fa-envelope" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="label">Email</span></a></li>
-						</ul>
+  <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+    <h4><b>About Me</b></h4>
+<p style="text-align: justify;">
+    I am currently pursuing a Bachelor's Degree in Mathematics at the National University of Singapore. My current interests in Mathematics are Linear Algebra, Number Theory as well as Real and Complex Analysis. My love for problem-solving has driven my accomplishments in various Mathematics competitions over the years, both locally and internationally. Also in the field of Computer Science, I'm mainly interested in Artificial Intelligence and Computer Graphics.
+</p>
 
-				</div>
-			</div>
-		<!-- Main -->
-			<div id="main">
+<p style="text-align: justify;">
+    Beyond my academic pursuits in Mathematics and Computer Science, I am also captivated by certain aspects of Geography, particularly in the areas of Tourism, Coastal Management, and Sustainable Development. I believe that understanding the dynamics of our planet is essential for devising sustainable solutions and preserving our environment for future generations.
+</p>
 
-				<!-- Intro -->
-					<section id="top" class="one dark cover">
-						<div class="container">
+<p style="text-align: justify;">
+    If you share similar interests or see potential collaboration opportunities, I would be delighted to connect with you. Let's engage in meaningful conversations and explore how we can make a difference together.
+</p>
+<button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
+        <i class="fa fa-download w3-margin-right"></i>Curriculum Vitae
+      </button>
+<hr>
 
-							<header>
-								<h2 class="alt">Hi! I'm <strong>Pang Ern</strong>!</h2>
-								<h6 class="alt" style="text-align:justify;"></h6>
-							</header>
-						</div>
-					</section>
-
-								<!-- Hello -->
-					<section id="hello" class="four">
-						<div class="container" style="color:black;">
-
-							<header>
-								<h2>Hello</h2>
-							</header>
-							<p style="text-align:justify;">I intend to major in Mathematics at the National University of Singapore. Also considering a Second Major in Computer Science. My current interests in Mathematics are Linear Algebra, Number Theory as well as Real and Complex Analysis. My love for problem-solving has driven my accomplishments in various Mathematics competitions over the years, both locally and internationally.
-
-<br><br>Beyond my academic pursuits in Mathematics and Computer Science, I am also captivated by certain aspects of Geography, particularly in the areas of Tourism, Coastal Management, and Sustainable Development. I believe that understanding the dynamics of our planet is essential for devising sustainable solutions and preserving our environment for future generations.
-
-								<br><br>Some of my hobbies are as follows.</p>
-
-							<table style="width: 100%;">
-    							<tbody>
-									<tr>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><span class="icon solid fa-camera"></span>&nbsp Photography</pre><br></td>
-										<td style="width: 50.0000%;">
-											<pre  style="text-align: center;"><span class="fa solid fa-video"></span>&nbsp Videography</pre><br></td>
-									</tr>
-								</tbody>
-								<tbody>
-									<tr>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><span class="fa solid fa-utensils"></span>&nbsp Cooking and Eating</pre><br></td>
-										<td style="width: 50.0000%;">
-											<pre  style="text-align: center;"><span class="icon brands fa-python"></span>&nbsp Coding</pre><br></td>
-									</tr>
-								</tbody>
-								<tbody>
-									<tr>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><i class="icon solid fa-swimming-pool"></i>&nbsp Swimming</pre><br></td>
-										<td style="width: 50.0000%;">
-											<pre  style="text-align: center;"><span class="fa solid fa-calculator"></span>&nbsp Mathematics</pre><br></td>
-									</tr>
-								</tbody>
-							</table>
-
-							<a class="image fit"><img  src="images/Dubai Fest Profile.JPG"/></a>
-							<figcaption>At Dubai Festival City in December 2019!</figcaption>
-
-
-							<p style="text-align:justify;">
-
-								<br> I believe every Mathematician has his/her favourite formula. I do have one as well and of course, it belongs to the realm of Number Theory. That is<p/>
-							\( p(n) \sim \dfrac{1}{4n\sqrt{3}}\operatorname{exp}\left(\pi\sqrt{\dfrac{2n}{3}}\right) \) for large \(n\).
-							<p style="text-align:justify;"> This formula for the number of partitions \(p(n)\) of an integer was developed by G. H. Hardy and Srinivasa Ramanujan. In my opinion, it is so beautiful since it
-							reminds me of the most beautiful mathematical equation coined by Leonhard Euler which is \(e^{i\pi}+1=0\). The asymptotic formula for the number of partitions of partitions encompasses
-							both \(\pi\) and \(e\), which are two of the most (actually 'the two most') famous constants in Mathematics. </p>
-
-						</div>
-					</section>
-
-					<section id="portfolio" class="two">
-						<div class="container" style="color:black;">
-
-							<header>
-								<h2>Portfolio </h2>
-								<p style="text-align:left;"> Link to my <a href="https://drive.google.com/file/d/1jevVz7C03gR6lIRX2ZHD1Ud4rB3bg94_/view?usp=share_link">curriculum vitae.</a></p>
-							</header>
-
-					</section>
-				<!-- Research -->
-					<section id="research" class="two" >
-						<div class="container" style="color:black;">
-
-							<header>
-								<h2>Research </h2>
-							</header>
-							<p style="text-align:justify;">I am particularly interested in problems in Real and Complex Analysis, Algebraic and Analytic Number Theory and Linear Algebra. Currently, I am investigating some interesting topics in Analytic Number Theory which include the prime number theorem, prime gaps and sieve methods. <br><br> Here are some of the problems which I have worked on. </p>
-							<p style="text-align:center;"><strong>ANALYTIC NUMBER THEORETIC METHODS IN SOLVING A DIOPHANTINE EQUATION (2022)</strong></p>
-
-							<p style="text-align:left;"> Find all solutions to the Diophantine Equation \(\displaystyle\prod_{k=1}^{n}\left(k^2+1\right)=b^2\).</p>
-							<p style="text-align:justify;">This has some relation to some major results in Number Theory. These include the law of quadratic reciprocity, Fermat's Sum of Two Squares Theorem, the prime number theorem, Bertrands's Postulate and some bounds involving the prime-counting function \(\pi(n)\),
-  								as well as Chebyshev's First and Second Functions, denoted by \(\vartheta(n)\) and \(\psi(n)\) respectively. You can view my paper		<a href="https://github.com/TheRayaGT/therayagt.github.io/blob/main/The%20Diophantine%20Equation%20(1%2B1%5E2)(1%2B2%5E2)...(1%2Bn%5E2).pdf">here</a>. </p>
-							<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>MathJax example</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-					</section>
-
-				<!-- Projects -->
-					<section id="projects" class="two">
-						<div class="container" style="color:black;">
-							<header>
-								<h2>Projects</h2>
-							</header>
-
-							<iframe width="560" height="315" src="https://www.youtube.com/embed/L6BfXCntNEQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<p><b>Hello Nanyang | NYJC Flowmotion (2021)</b></p>
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-large w3-grey">
+    <h4 id="contact"><b>Contact Me</b></h4>
+    <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+        <div class="w3-third w3-dark-grey" style="width: 50%;">
+            <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
+            <p style="width: 100%;">therayagrowtopia@gmail.com</p>
+        </div>
+        <div class="w3-third w3-teal" style="width: 50%;">
+            <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
+            <p style="width: 100%;">Singapore</p>
+        </div>
+    </div>
+    <hr class="w3-opacity">
+    <form action="/action_page.php" target="_blank">
+        <div class="w3-section">
+            <label>Name</label>
+            <input class="w3-input w3-border" type="text" name="Name" required>
+        </div>
+        <div class="w3-section">
+            <label>Email</label>
+            <input class="w3-input w3-border" type="text" name="Email" required>
+        </div>
+        <div class="w3-section">
+            <label>Message</label>
+            <input class="w3-input w3-border" type="text" name="Message" required>
+        </div>
+        <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
+    </form>
+</div>
 
 
-							<iframe width="560" height="315" src="https://www.youtube.com/embed/cwYR39uuKDo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<p><b>Xinmin Secondary School Flowmotion (2019)</b></p></div>
-					</section>
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-32 w3-dark-grey">
+  <div class="w3-row-padding">
+    <div class="w3-third">
+      <h3>FOOTER</h3>
+      <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </div>
+  
+    <div class="w3-third">
+      <h3>BLOG POSTS</h3>
+      <ul class="w3-ul w3-hoverable">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+      </ul>
+    </div>
 
-	<!-- Photography -->
-					<section id="photography" class="two">
-						<div class="container" style="color:black;">
+    <div class="w3-third">
+      <h3>POPULAR TAGS</h3>
+      <p>
+        <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
+        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
+      </p>
+    </div>
 
-							<header>
-								<h2>Photography</h2>
-							</header>
+  </div>
+  </footer>
+  
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 
-							<p>Hello!</p>
+<!-- End page content -->
+</div>
 
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a class="image fit" <img src="images/Jewel Light Show.JPG" alt="" /></a>
-										<header>
-											<h3>Light Show at Jewel @ Changi </h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Kampong Glam.JPG" alt="" /></a>
-										<header>
-											<h3>Kampong Glam</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a class="image fit"><img src="images/Gardens by the Bay.JPG" alt="" /></a>
-										<header>
-											<h3>Gardens by the Bay</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Dubai Fountain.jpg" alt="" /></a>
-										<header>
-											<h3>Dubai Fountain</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a  class="image fit"><img src="images/Marina Bay Sands Lightshow.JPG" alt="" /></a>
-										<header>
-											<h3>Marina Bay Sands Light Show</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Gardens by the Bay Sunrise.jpg" alt="" /></a>
-										<header>
-											<h3>Gardens by the Bay Sunrise</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a  class="image fit"><img src="images/Toa Payoh Five Fingers.JPG" alt="" /></a>
-										<header>
-											<h3>Toa Payoh Five Fingers</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Raffles Place.JPG" alt="" /></a>
-										<header>
-											<h3>Raffles Place</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
 
-									<article class="item">
-										<a  class="image fit"><img src="images/Joo Chiat Shophouses.JPG" alt="" /></a>
-										<header>
-											<h3>Joo Chiat Shophouses</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Esplanade.JPG" alt="" /></a>
-										<header>
-											<h3>Esplanade</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Fireworks Edited.jpg" alt="" /></a>
-										<header>
-											<h3>NDP Fireworks 2022</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/St. Joseph's Church.JPG" alt="" /></a>
-										<header>
-											<h3>St. Joseph's Church</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Elgin Bridge.JPG" alt="" /></a>
-										<header>
-											<h3>Elgin Bridge</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Victoria Theatre and Concert Hall.JPG" alt="" /></a>
-										<header>
-											<h3>Victoria Theatre and Concert Hall</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Dubai Marina.JPG" alt="" /></a>
-										<header>
-											<h3>Dubai Marina</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Opening of MBS Apple Store.jpg" alt="" /></a>
-										<header>
-											<h3>Opening of MBS Apple Store</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Haig Road HDB.JPG" alt="" /></a>
-										<header>
-											<h3>Haig Road HDB</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/CapitaSpring Viewing Deck.JPG" alt="" /></a>
-										<header>
-											<h3>CapitaSpring Viewing Deck</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Al Barsha.JPG" alt="" /></a>
-										<header>
-											<h3>Al Barsha</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Kampung Admiralty.JPG" alt="" /></a>
-										<header>
-											<h3>Kampung Admiralty</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Lost Chambers Aquarium.JPG" alt="" /></a>
-										<header>
-											<h3>Lost Chambers Aquarium</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Burj Khalifa.JPG" alt="" /></a>
-										<header>
-											<h3>Burj Khalifa</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Atlantis, The Palm.JPG" alt="" /></a>
-										<header>
-											<h3>Atlantis, The Palm</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/2019 Solar Eclipse.JPG" alt="" /></a>
-										<header>
-											<h3>2019 Solar Eclipse</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Marina Bay Sands Sunrise.jpg" alt="" /></a>
-										<header>
-											<h3>Marina Bay Sands Sunrise</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Merlion.JPG" alt="" /></a>
-										<header>
-											<h3>Merlion</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Dubai Creek.JPG" alt="" /></a>
-										<header>
-											<h3>Dubai Creek</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Katong Plants.JPG" alt="" /></a>
-										<header>
-											<h3>Katong Plants</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-
-									<article class="item">
-										<a  class="image fit"><img src="images/Golden Mile.jpg" alt="" /></a>
-										<header>
-											<h3>Beach Road HDB</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a class="image fit"><img src="images/Supermoon.jpg" alt="" /></a>
-										<header>
-											<h3>Supermoon</h3>
-										</header>
-									</article>
-								</div>
-							</div>
-						</div>
-					</section>
-
-				<!-- Contact -->
-					<section id="contact" class="four">
-						<div class="container" style="color:black;">
-
-							<header>
-								<h2>Contact</h2>
-							</header>
-
-							<p>Let's connect!</p>
-
-							<table style="width: 100%;">
-    							<tbody>
-									<tr>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><a href="https://www.instagram.com/thangpangern/"class="icon brands fa-instagram" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></span>&nbsp Instagram</a></pre><br></td>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><a href="https://www.linkedin.com/in/thang-pang-ern-85448a167/"class="icon brands fa-linkedin" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></span>&nbsp LinkedIn</a></pre><br></td>
-									</tr>
-								</tbody>
-								<tbody>
-									<tr>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><a href="https://github.com/TheRayaGT"class="icon brands fa-github" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></span>&nbsp GitHub</a></pre><br></td>
-										<td style="width: 50.0000%;">
-											<pre style="text-align: center;"><a class="icon solid fa-envelope" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></span>&nbsp Email (therayagrowtopia@gmail.com)</a></pre><br></td>
-									</tr>
-								</tbody>
-							</table>
-					</section>
-
-						</div>
-
-			<div id="footer">
-
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; Thang Pang Ern 2023. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
 <script type="text/javascript" charset="utf-8"
 src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML,
