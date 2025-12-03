@@ -34,6 +34,36 @@
   }
 }
 
+.about__videos-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* allows stacking on small screens */
+    margin-top: 15px;
+}
+
+.about__videos-row iframe {
+    width: 30%;
+    min-width: 280px;  /* ensures readability on smaller screens */
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: 0px;
+}
+
+.custom-thumbnail {
+    width: 100%;
+    max-width: 350px;   /* adjust size */
+    border-radius: 0px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.custom-thumbnail:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+
 /*===== BASE =====*/
 *, ::before, ::after {
   box-sizing: border-box;
