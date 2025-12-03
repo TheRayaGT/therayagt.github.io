@@ -34,6 +34,25 @@
   }
 }
 
+.year-title {
+    font-weight: 700;
+    color: #c40000; /* red */
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.module-list {
+    margin-left: 15px;
+    line-height: 1.55;
+}
+
+.audited {
+    font-weight: 700;
+    color: #0066cc; /* blue */
+}
+
+
 .about__videos-row {
     display: flex;
     justify-content: center;
