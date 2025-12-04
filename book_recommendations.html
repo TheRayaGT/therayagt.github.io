@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="F:\New Website\assets\styles.css">
+
+        <!-- =====BOX ICONS===== -->
+        <link rel="icon" type="image/x-icon" href="F:\New Website\img\favicon.ico">
+
+
+        <title>Thang Pang Ern</title>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="#" class="nav__logo">Thang Pang Ern</a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href=https://therayagt.github.io class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href=https://therayagt.github.io/creatives class="nav__link">Creatives</a></li>
+                        <li class="nav__item"><a href=https://therayagt.github.io/notes class="nav__link">Notes</a></li>
+                        <li class="nav__item"><a href=https://therayagt.github.io/book_recommendations class="nav__link active-link">Book Recommendations</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+
+            <!--===== ABOUT =====-->
+            <section class="about section " id="Book Recommendations">
+                <h2 class="section-title">Book Recommendations</h2>
+
+                <div class="bd-grid">
+                    <div class="about__text">
+                        I currently have a personal library of over 200 books at home, most of which are Mathematics texts, along with selected titles in Geography, Computer Science, and Physics. Whenever I have free time, I enjoy diving into these books. Below are some carefully curated book recommendations that I have found especially helpful in my pursuit of Mathematics. By the way, I'm a big fan of Springer.
+                        <br><br> ► <span style="color: #c40000;">Essential Mathematics for Undergraduates: A Guided Approach to Algebra, Geometry, Topology and Analysis</span> by Simon G. Chiossi (2021). This book was the main reference book I used when studying MA1100T Basic Discrete Mathematics (T) and I liked it as it covered the course contents plus beyond in depth!
+
+                        <br><br> ► <span style="color: #c40000;">Abstract Algebra</span> by David S. Foote and Richard M. Foote (2003). My journey in Abstract Algebra surprisingly did not start from here though as I found the book pretty abstract back then. Instead, I turned to <i>Contemporary Abstract Algebra</i> by Joseph A. Gallian (2013), which is a much easier reference text with many good examples and exercises. Having said that, one must still walk through the gates of Dummit and Foote's book.
+
+                        <br><br> ► <span style="color: #c40000;">Linear Algebra Done Right (4th edition)</span> by Sheldon M. Axler (2023).
+
+                        <br><br> ► <span style="color: #c40000;">Analytic Number Theory: Exploring the Anatomy of Integers</span> by Jean-Marie De Koninck and Florian Luca (2012). Contrary to the standard reference text by Apostol (1986), I prefer this book a lot. In fact, this was the first book on Analytic Number Theory that I encountered and it made me fall in love even more. Nice exercises and solutions included. Occassionally, I would read M. Overholt's <i>A Course in Analytic Number Theory</i> (2014) too which complements this book very well.
+            </section>
+
+
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <p class="footer__title">Thang Pang Ern</p>
+            <div class="footer__formula">
+        \[p\left(n\right)\sim \frac{1}{4n\sqrt{3}}\operatorname{exp}\left(\pi\sqrt{\frac{2n}{3}}\right)\]
+    </div>
+            <div class="footer">
+                <i>'I am interested in Mathematics only as a creative art.'</i> ~ G. H. Hardy
+            </div>
+            <p class="footer__copy">&#169; Bedimcode. All rigths reserved.</p>
+        </footer>
+
+
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--===== MAIN JS =====-->
+        <script src="F:\New Website\assets\main.js"></script>
+    </body>
+</html>
+
+<script type="text/javascript" charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML,
+  https://vincenttam.github.io/javascripts/MathJaxLocal.js"></script>
+
+  <script>
+  function smoothScroll(event) {
+      event.preventDefault();
+      const targetId = event.target.getAttribute('href').substring(1); // Get the target element ID excluding the #
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+          window.scrollTo({
+              top: targetElement.offsetTop,
+              behavior: 'smooth' // Smooth scroll behavior
+          });
+      }
+  }
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
+  </script>
