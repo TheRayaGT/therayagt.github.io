@@ -43,10 +43,17 @@
                 </div>
 
                 <div class="home__social">
-                    <a href="https://github.com/TheRayaGT/" class=home__social-icon><i class='bx bxl-github' ></i></a>
-                    <a href="https://www.instagram.com/thangpangern" class=home__social-icon><i class='bx bxl-instagram'></i></a>
-                    <a href="https://www.linkedin.com/in/thang-pang-ern-85448a167/" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://github.com/TheRayaGT/" class="home__social-icon">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                    <a href="https://www.instagram.com/thangpangern" class="home__social-icon">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/thang-pang-ern-85448a167/" class="home__social-icon">
+                        <i class='bx bxl-linkedin'></i>
+                    </a>
                 </div>
+
 
                 <div class="home__img">
                     <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -76,6 +83,158 @@
                         If you would like to reach out, you can do so via email. My primary email address is <b>therayagrowtopia@gmail.com</b> and my school email address is <b>thangpangern@u.nus.edu</b>.
                         <br><br><a href="\NEW\Thang Pang Ern CV.pdf" class="button">Curriclum Vitae</a></p>
                     </div>
+
+  </section>
+</div>
+
+
+                    <div class="dot-game-wrapper">
+
+  <section class="dot-game-section" id="dot-game">
+    <div class="dot-game-card">
+      <h2 class="dot-game-title">Dot Estimation Game</h2>
+      <p class="dot-game-subtitle">
+        Look at the coloured dots and guess how many there are.
+      </p>
+
+      <canvas id="dotCanvas" width="420" height="420"></canvas>
+
+      <div class="dot-game-controls">
+        <label for="guessInput" class="dot-game-label">
+          Your estimate:
+        </label>
+        <input type="number" id="guessInput" class="dot-game-input" min="1" />
+        <button id="submitGuess" class="dot-game-button">Check</button>
+        <button id="newRound" class="dot-game-button dot-game-button-ghost">
+          New Round
+        </button>
+      </div>
+
+      <div id="feedback" class="dot-game-feedback"></div>
+      <div id="stats" class="dot-game-stats"></div>
+    </div>
+
+
+
+
+<script>
+  (function () {
+    const canvas = document.getElementById("dotCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const guessInput = document.getElementById("guessInput");
+    const submitGuessBtn = document.getElementById("submitGuess");
+    const newRoundBtn = document.getElementById("newRound");
+    const feedbackEl = document.getElementById("feedback");
+    const statsEl = document.getElementById("stats");
+
+    let actualCount = 0;
+    let roundsPlayed = 0;
+    let totalAbsError = 0;
+
+    const MIN_DOTS = 25;
+    const MAX_DOTS = 120;
+
+    const COLORS = [
+      "#ff6b6b",
+      "#4dabf7",
+      "#51cf66",
+      "#fcc419",
+      "#845ef7",
+      "#f06595"
+    ];
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function randomDotCount() {
+  const r = Math.random();
+
+  // Mix of easy / medium / hard ranges
+  if (r < 0.25) {
+    // easy: visibly countable
+    return randomInt(10, 30);
+  } else if (r < 0.55) {
+    // medium
+    return randomInt(31, 80);
+  } else if (r < 0.8) {
+    // harder
+    return randomInt(81, 140);
+  } else {
+    // very hard
+    return randomInt(141, 220);
+  }
+}
+
+
+    function drawDots() {
+  clearCanvas();
+  actualCount = randomDotCount();  // <--- use new randomness
+
+  for (let i = 0; i < actualCount; i++) {
+    const radius = randomInt(4, 8);
+    const x = randomInt(radius, canvas.width - radius);
+    const y = randomInt(radius, canvas.height - radius);
+    const color = COLORS[randomInt(0, COLORS.length - 1)];
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 0.9;
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
+
+    function startNewRound() {
+      drawDots();
+      feedbackEl.textContent = "";
+      guessInput.value = "";
+      guessInput.focus();
+    }
+
+    function handleGuess() {
+      const guess = parseInt(guessInput.value, 10);
+      if (isNaN(guess) || guess <= 0) {
+        feedbackEl.textContent = "Please enter a positive number.";
+        return;
+      }
+
+      const error = Math.abs(guess - actualCount);
+      roundsPlayed++;
+      totalAbsError += error;
+      const avgError = (totalAbsError / roundsPlayed).toFixed(1);
+
+      feedbackEl.innerHTML =
+        `You guessed <strong>${guess}</strong>. ` +
+        `There were <strong>${actualCount}</strong> dots. ` +
+        `Your error this round: <strong>${error}</strong>.`;
+
+      statsEl.innerHTML =
+        `Rounds played: <strong>${roundsPlayed}</strong> &nbsp;|&nbsp; ` +
+        `Average error: <strong>${avgError}</strong>`;
+
+      // Optional: auto-generate a new pattern after checking
+      // startNewRound();
+    }
+
+    submitGuessBtn.addEventListener("click", handleGuess);
+    newRoundBtn.addEventListener("click", startNewRound);
+    guessInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") handleGuess();
+    });
+
+    // Initial round
+    startNewRound();
+  })();
+</script>
+
 
                 </div>
             </section>
