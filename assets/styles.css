@@ -33,26 +33,6 @@
     --smaller-font-size: .875rem;
   }
 }
-
-.year-title {
-    font-weight: 700;
-    color: #c40000; /* red */
-    margin-top: 20px;
-    margin-bottom: 8px;
-    font-size: 20px;
-}
-
-.module-list {
-    margin-left: 15px;
-    line-height: 1.55;
-}
-
-.audited {
-    font-weight: 700;
-    color: #0066cc; /* blue */
-}
-
-
 .about__videos-row {
     display: flex;
     justify-content: center;
@@ -67,6 +47,19 @@
     aspect-ratio: 16/9;
     border: none;
     border-radius: 0px;
+}
+
+.custom-thumbnail {
+    width: 100%;
+    max-width: 350px;   /* adjust size */
+    border-radius: 0px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.custom-thumbnail:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
 .video-card-row {
@@ -98,6 +91,140 @@
     cursor: pointer;
 }
 
+.year-title {
+    font-weight: 700;
+    color: #c40000; /* red */
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.module-list {
+    margin-left: 15px;
+    line-height: 1.55;
+}
+
+.audited {
+    font-weight: normal;        /* keep rest of sentence normal weight */
+}
+
+.audited .label {
+    font-weight: bold;          /* make only “Audited:” bold */
+    color: #4CAF50;             /* choose any colour you like */
+}
+
+/* Center the whole game section */
+.dot-game-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+/* Card style */
+.dot-game-card {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+  padding: 1.75rem 2rem 2rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+/* If your site is dark, you can invert these colors later */
+.dot-game-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.dot-game-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  margin-bottom: 1rem;
+}
+
+/* Canvas */
+#dotCanvas {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: block;
+  margin: 0 auto 1.25rem;
+}
+
+/* Controls */
+.dot-game-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.dot-game-label {
+  font-size: 0.95rem;
+}
+
+.dot-game-input {
+  width: 5rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Buttons */
+.dot-game-button {
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+  background: #66a329;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(77, 171, 247, 0.35);
+}
+
+.dot-game-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(77, 171, 247, 0.5);
+}
+
+.dot-game-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(77, 171, 247, 0.4);
+}
+
+.dot-game-button-ghost {
+  background: #fff;
+  color: #66a329;
+  border: 1px solid #66a329;
+  box-shadow: none;
+}
+
+/* Feedback / stats */
+.dot-game-feedback {
+  margin-top: 0.4rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.dot-game-stats {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+
+
+
 .video-title {
     margin-top: 10px;
     font-size: 14px;
@@ -105,21 +232,8 @@
     color: #222;
     padding: 6px;
     background: #f3f3f3;
+    background: #f3f3f3;
     border-radius: 8px;
-}
-
-
-.custom-thumbnail {
-    width: 100%;
-    max-width: 350px;   /* adjust size */
-    border-radius: 0px;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.custom-thumbnail:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
 
@@ -293,9 +407,7 @@ img {
   font-size: 1.5rem;
   color: var(--second-color);
 }
-.home__social-icon:hover {
-  color: var(--first-color);
-}
+
 .home__img {
   position: absolute;
   right: 0;
