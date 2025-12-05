@@ -87,36 +87,6 @@
   </section>
 </div>
 
-
-                    <div class="dot-game-wrapper">
-
-  <section class="dot-game-section" id="dot-game">
-    <div class="dot-game-card">
-      <h2 class="dot-game-title">Dot Estimation Game</h2>
-      <p class="dot-game-subtitle">
-        Look at the coloured dots and guess how many there are.
-      </p>
-
-      <canvas id="dotCanvas" width="420" height="420"></canvas>
-
-      <div class="dot-game-controls">
-        <label for="guessInput" class="dot-game-label">
-          Your estimate:
-        </label>
-        <input type="number" id="guessInput" class="dot-game-input" min="1" />
-        <button id="submitGuess" class="dot-game-button">Check</button>
-        <button id="newRound" class="dot-game-button dot-game-button-ghost">
-          New Round
-        </button>
-      </div>
-
-      <div id="feedback" class="dot-game-feedback"></div>
-      <div id="stats" class="dot-game-stats"></div>
-    </div>
-
-
-
-
 <script>
   (function () {
     const canvas = document.getElementById("dotCanvas");
