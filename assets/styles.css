@@ -222,6 +222,14 @@
   opacity: 0.75;
 }
 
+.cn-name{
+  font-family: "FZKai-Z03", "FZ Kai-Z03", "FZKai",
+               "FangZheng KaiTi", "FZKTJW",
+               "KaiTi", "STKaiti", serif;
+  font-weight: 400;
+  margin-left: 0.5rem;   /* remove if you use <br> */
+  font-size: 0.95em;     /* tweak to taste */
+}
 
 
 
