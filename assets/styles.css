@@ -113,6 +113,15 @@
     color: #4CAF50;             /* choose any colour you like */
 }
 
+.TA {
+    font-weight: normal;        /* keep rest of sentence normal weight */
+}
+
+.TA .label {
+    font-weight: bold;          /* make only “Audited:” bold */
+    color: #BA4762;             /* choose any colour you like */
+}
+
 /* Center the whole game section */
 .dot-game-section {
   min-height: 100vh;
