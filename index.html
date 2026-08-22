@@ -1,291 +1,680 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thang Pang Ern</title>
+<meta name="description" content="Thang Pang Ern — mathematics undergraduate at the National University of Singapore, working in analytic number theory.">
+<meta name="author" content="Thang Pang Ern">
+<meta property="og:title" content="Thang Pang Ern">
+<meta property="og:description" content="Thang Pang Ern — mathematics undergraduate at the National University of Singapore, working in analytic number theory.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<style>
+/* ==========================================================================
+   Thang Pang Ern — site styles
+   Concept: the site is a mathematical monograph. Pages are chapters,
+   sections are numbered, videos are figures, books are a bibliography.
+   Display type is Computer Modern (borrowed from KaTeX), body is Source
+   Serif 4, and catalogue data is set in IBM Plex Mono.
+   ========================================================================== */
 
-        <link rel="stylesheet" href="\assets\styles.css">
+:root {
+  --paper:      #0B1D13;
+  --paper-deep: #071009;
+  --plate:      #10281A;
+  --ink:        #E8F5E4;
+  --muted:      #8FB097;
+  --rule:       #1F4029;
+  --rule-soft:  #142B1C;
+  --gold:       #A9F04C;
+  --wash:       rgba(169, 240, 76, 0.14);
+  --dot-ring:   rgba(255, 255, 255, 0.28);
 
-        <!-- =====BOX ICONS===== -->
-        <link rel="icon" type="image/x-icon" href="\img\favicon.ico">
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --cm:    "KaTeX_Main", "Latin Modern Roman", "Nimbus Roman", Georgia, serif;
+  --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-        <title>Thang Pang Ern</title>
-    </head>
-    <body>
-        <!--===== HEADER =====-->
-        <header class="l-header">
-            <nav class="nav bd-grid">
-                <div>
-                    <a href="#" class="nav__logo">Thang Pang Ern</a>
-                </div>
+  --maxw: 72rem;
+  --rail: 7rem;
+  --gutter: 3rem;
+  --measure: 40rem;
+}
 
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href=https://therayagt.github.io class="nav__link active-link">Home</a></li>
-                        <li class="nav__item"><a href=https://therayagt.github.io/creatives class="nav__link">Creatives</a></li>
-                        <li class="nav__item"><a href=https://therayagt.github.io/notes class="nav__link">Notes</a></li>
-                        <li class="nav__item"><a href=https://therayagt.github.io/book_recommendations class="nav__link">Book Recommendations</a></li>
-                    </ul>
-                </div>
+* { box-sizing: border-box; }
 
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </nav>
-        </header>
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
-        <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h3 class="home__title">Hi,<br>I'm <span class="home__title-color">Thang Pang Ern</span>!<br></h3>
-                </div>
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image: radial-gradient(130% 85% at 50% -12%,
+      #16391F 0%, #0E2617 38%, var(--paper) 62%, var(--paper-deep) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17.5px;
+  line-height: 1.62;
+  font-feature-settings: "kern" 1, "onum" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+}
 
-                <div class="home__social">
-                    <a href="https://github.com/TheRayaGT/" class="home__social-icon">
-                        <i class='bx bxl-github'></i>
-                    </a>
-                    <a href="https://www.instagram.com/thangpangern" class="home__social-icon">
-                        <i class='bx bxl-instagram'></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/thang-pang-ern-85448a167/" class="home__social-icon">
-                        <i class='bx bxl-linkedin'></i>
-                    </a>
-                </div>
+@media (max-width: 640px) { body { font-size: 16.5px; } }
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; }
+
+@media (max-width: 640px) { .wrap { padding: 0 1.25rem; } }
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: var(--paper);
+  padding: .6rem 1rem; font-family: var(--mono); font-size: .8rem; z-index: 99;
+}
+.skip:focus { left: .5rem; top: .5rem; }
 
 
-                <div class="home__img">
-                    <svg class="home__blob"
-                         viewBox="0 0 479 467"
-                         xmlns="http://www.w3.org/2000/svg"
-                         xmlns:xlink="http://www.w3.org/1999/xlink"
-                         style="width: 220px; max-width: 100%; height: auto; transform: translate(40px, -80px)">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="60" href="\img\parabola.png"/>
-                        </g>
-                    </svg>
-                </div>
+main, .colophon, .masthead { position: relative; }
 
-            </section>
+/* --- masthead ------------------------------------------------------------ */
 
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
+.masthead {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(11, 29, 19, 0.86);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
 
-                <div class="about__container bd-grid">
-                    <div class="about__img">
-                        <img src="\img\profile_pic.png" alt="">
-                    </div>
+.masthead-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: .75rem 2rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap;
+}
 
-                            <div>
-                                <h2 class="about__subtitle">
-                                  Thang Pang Ern
-                                  <span class="cn-name" lang="zh-Hans">汤邦恩</span>
-                                </h2>
-                                <p class="about__text">
-                                    I am a second-year Mathematics undergraduate at the National University of Singapore (NUS). Inspired by the elegance and depth of pure mathematics, I’m currently drawn to Analytic Number Theory and its beautiful interplay between analysis and the properties of integers. I am mainly interested in theta functions, hypergeometric series, partitions, modular forms, modular equations, and properties of the Riemann zeta function.
-                                    <br><br>
-                                    If you would like to reach out, you can do so via email. My primary email address is <b>therayagrowtopia%%%@%%%gmail.com</b> and my school email address is <b>thangpangern%%%@%%%u.nus.edu</b> (remove %%%s). <i>I reply very fast too</i>.
-                                    <br><br>
-                                    <a href="\NEW\Thang Pang Ern CV.pdf" class="button">Curriculum Vitae</a>
-                                </p>
-                    
-                                <p class="about__text" style="margin-top: 1.5rem;">
-                                    Here is a list of talks that I have been to.
-                                    <br><br>
-                                    <!-- Update the href to the actual path/name of your talks PDF -->
-                                    <a href="\NEW\List of Talks Attended.pdf" class="button">Talks Attended</a>
-                                </p>
+.brand { font-family: var(--cm); font-size: 1.05rem; letter-spacing: .01em; }
+.brand .cjk { color: var(--muted); font-size: .82em; margin-left: .45em; }
 
-                                <p class="about__text" style="margin-top: 1.5rem;">
-                                Here are some random facts about me:
-                            </p>
-                            
-                            <ul class="about__text fun-facts">
-                                <li>I memorised the periodic table when I was 13 in two days.</li>
-                                <li>I know the lyrics to <i>Despacito</i>.</li>
-                                <li>I know the full name of Bangkok.</li>
-                                <li>I know 75 digits of \(\pi\).</li>
-                            </ul>
-                            </div>
+.toc {
+  display: flex; gap: 1.35rem; flex-wrap: wrap;
+  font-family: var(--mono); font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .1em;
+}
+.toc a { color: var(--muted); padding-bottom: 3px; border-bottom: 1px solid transparent; }
+.toc a:hover { color: var(--ink); border-bottom-color: var(--rule); }
+.toc a .n { color: var(--ink); opacity: .45; margin-right: .45em; }
+.toc a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--gold); }
+.toc a[aria-current="page"] .n { opacity: 1; }
 
-  </section>
+@media (max-width: 640px) {
+  .masthead-inner { padding: .7rem 1.25rem; }
+  .toc { gap: 1rem; font-size: .68rem; }
+}
+
+/* --- hero ---------------------------------------------------------------- */
+
+.hero { padding-top: 4.5rem; padding-bottom: 3rem; }
+.hero .eyebrow {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 1.4rem;
+}
+.hero h1 {
+  font-family: var(--cm); font-weight: 400;
+  font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.02;
+  margin: 0; letter-spacing: -.01em;
+}
+.hero .cjk-line {
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  color: var(--muted); letter-spacing: .3em; margin: .7rem 0 0;
+}
+.hero .lede {
+  max-width: 34rem; margin: 1.6rem 0 0;
+  font-size: 1.12rem; color: var(--muted);
+}
+.hero .lede em { color: var(--ink); font-style: normal; }
+
+/* --- figures: generated mathematics --------------------------------------- */
+
+.plate { margin: 2.4rem 0 0; }
+.plate-lead { margin: .5rem 0 0; }
+.plate-lead .figcap { max-width: 46rem; }
+.plates {
+  display: grid; grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+  gap: 2.4rem; align-items: end; margin-top: 2.4rem;
+}
+.plates .plate { margin: 0; }
+.plate.narrow .mfig { max-width: 16rem; margin-left: auto; margin-right: auto; }
+@media (max-width: 760px) { .plates { grid-template-columns: 1fr; gap: 2rem; } }
+
+.mfig {
+  display: block; width: 100%; height: auto;
+  background: rgba(6, 15, 9, 0.66);
+  border: 1px solid var(--rule);
+  padding: 1rem;
+}
+.mfig .axis  { stroke: var(--ink); stroke-width: 1; }
+.mfig .edge  { stroke: var(--ink); stroke-width: .7; stroke-dasharray: 2 3; }
+.mfig .crit  { stroke: var(--gold); stroke-width: 1.6; }
+.mfig .grid  { stroke: var(--rule); stroke-width: .7; }
+.mfig .tick  { stroke: var(--ink); stroke-width: .8; }
+.mfig .circ  { fill: none; stroke: var(--ink); stroke-width: .85; }
+.mfig .circ.hi { fill: var(--wash); }
+.mfig .tile  { fill: none; stroke: var(--ink); stroke-width: .65; }
+.mfig .tile.home { fill: var(--wash); stroke-width: 1.3; }
+.mfig .band  { fill: var(--wash); }
+.mfig .curve { fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.mfig .pt    { fill: var(--gold); stroke: var(--ink); stroke-width: .9; }
+.mfig .pole  { fill: var(--paper); stroke: var(--ink); stroke-width: 1.2; }
+.mfig .lbl   { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+.mfig .lbl.em { fill: var(--ink); font-family: var(--cm); font-style: italic; font-size: 15px; }
+
+.mfig .mv    { transition: transform .85s cubic-bezier(.34,.9,.28,1); }
+.mfig .ttl   { font-family: var(--cm); fill: var(--ink); font-size: 25px; }
+.mfig .slot  { opacity: 0; transition: opacity .55s ease; }
+.mfig .slot.on { opacity: 1; }
+.mfig .res   { font-family: var(--cm); fill: var(--gold); font-size: 46px; opacity: 0; transition: opacity .6s ease; }
+.mfig .res.on { opacity: 1; }
+.mfig .stage { transition: opacity .6s ease; }
+.mfig .stage.dim { opacity: .16; }
+
+.pseq {
+  display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.8rem 0 0; padding: 0;
+  font-family: var(--mono); font-size: .78rem; color: var(--muted);
+}
+.pseq span { border: 1px solid var(--rule); padding: .28rem .55rem; }
+.pseq b { color: var(--gold); font-weight: 400; }
+
+.math-block { margin: 2.4rem 0 0; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+
+.facts { list-style: none; margin: 0; padding: 0; }
+.facts li { padding: .55rem 0; border-bottom: 1px dotted var(--rule); }
+.facts li:last-child { border-bottom: 0; }
+
+/* --- sections ------------------------------------------------------------ */
+
+.sec {
+  display: grid; grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: 0 var(--gutter);
+  padding: 3.2rem 0;
+  border-top: 1px solid var(--rule);
+}
+.sec-rail {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); padding-top: .5rem;
+}
+.sec-rail .num {
+  display: block; color: var(--ink); font-size: 1rem;
+  letter-spacing: 0; margin-bottom: .3rem;
+}
+.sec-body { max-width: var(--measure); }
+.sec-body.is-wide { max-width: 52rem; }
+
+.sec h2 {
+  font-family: var(--cm); font-weight: 700; font-size: 1.55rem;
+  line-height: 1.2; margin: 0 0 1.1rem;
+}
+.sec h3 {
+  font-family: var(--cm); font-weight: 700; font-size: 1.05rem;
+  margin: 2rem 0 .7rem;
+}
+.sec p { margin: 0 0 1rem; }
+.sec p:last-child { margin-bottom: 0; }
+
+@media (max-width: 860px) {
+  .sec { grid-template-columns: 1fr; gap: .5rem; }
+  .sec-rail { padding-top: 0; }
+  .sec-rail .num { display: inline; margin-right: .7rem; font-size: .9rem; }
+  .sec { padding: 2.4rem 0; }
+}
+
+/* --- prose links ---------------------------------------------------------- */
+
+.prose a, .bib a, .note a, .figcap a {
+  background-image: linear-gradient(var(--wash), var(--wash));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% .14em;
+  border-bottom: 1px solid var(--gold);
+  transition: background-size .2s ease;
+}
+.prose a:hover, .bib a:hover, .note a:hover, .figcap a:hover { background-size: 100% 100%; }
+
+.muted { color: var(--muted); }
+.mono  { font-family: var(--mono); font-size: .9em; letter-spacing: .01em; font-feature-settings: "onum" 0; }
+
+/* --- portrait ------------------------------------------------------------- */
+
+.portrait {
+  float: right; width: 11rem; margin: .3rem 0 1.4rem 2rem;
+  border: 1px solid var(--rule); background: var(--plate); padding: .5rem;
+}
+.portrait img { display: block; width: 100%; height: auto; }
+.portrait figcaption {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); margin-top: .5rem;
+}
+@media (max-width: 640px) { .portrait { float: none; margin: 0 0 1.6rem; width: 9.5rem; } }
+
+/* --- document links (CV, talks) ------------------------------------------ */
+
+.docs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.docs li { border-bottom: 1px solid var(--rule); }
+.docs a {
+  display: grid; grid-template-columns: minmax(0,1fr) auto;
+  gap: 1rem; align-items: baseline; padding: .85rem .4rem;
+  transition: background .15s ease;
+}
+.docs a:hover { background: var(--wash); }
+.docs .t { font-size: 1.02rem; }
+.docs .t small { display: block; color: var(--muted); font-size: .84rem; }
+.docs .ext {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); white-space: nowrap;
+}
+
+/* --- remarks (LaTeX theorem environment) --------------------------------- */
+
+.rem { margin: 0 0 .85rem; padding-left: 1rem; border-left: 2px solid var(--gold); }
+.rem .h { font-family: var(--cm); font-weight: 700; }
+.rem .b { font-style: italic; }
+
+/* --- contact -------------------------------------------------------------- */
+
+.addr { font-family: var(--mono); font-size: .92rem; line-height: 2; margin: 0; }
+.addr .k {
+  display: inline-block; min-width: 5.5rem; color: var(--muted);
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+}
+.social { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1.4rem 0 0; }
+.social a {
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+  border-bottom: 1px solid var(--rule); padding-bottom: 2px;
+}
+.social a:hover { color: var(--ink); border-bottom-color: var(--gold); }
+
+/* --- figures (creatives) --------------------------------------------------- */
+
+.figs {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2rem 1.8rem; margin: 0;
+}
+.fig { margin: 0; }
+.fig-plate {
+  display: block; position: relative; overflow: hidden;
+  border: 1px solid var(--rule); background: var(--plate); aspect-ratio: 16 / 9;
+}
+.fig-plate img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform .6s cubic-bezier(.2,.7,.3,1);
+}
+.fig-plate:hover img { transform: scale(1.04); }
+.fig-plate::after {
+  content: "PLAY"; position: absolute; left: .7rem; bottom: .7rem;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .16em;
+  background: var(--gold); color: #16181C; padding: .25rem .5rem;
+}
+.figcap { margin-top: .7rem; font-size: .95rem; }
+.figcap .lbl {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); margin-right: .5rem;
+}
+
+.gear { list-style: none; margin: 0; padding: 0; }
+.gear li {
+  display: grid; grid-template-columns: 7.5rem minmax(0,1fr); gap: .2rem 1rem;
+  padding: .6rem 0; border-bottom: 1px solid var(--rule-soft);
+}
+.gear .k {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); padding-top: .28rem;
+}
+@media (max-width: 640px) { .gear li { grid-template-columns: 1fr; } }
+
+.cities { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.cities li {
+  font-family: var(--mono); font-size: .74rem; color: var(--muted);
+  border: 1px solid var(--rule); padding: .2rem .55rem;
+}
+.cities li.cn { border-color: var(--gold); color: var(--ink); }
+
+/* --- catalogue (notes) ----------------------------------------------------- */
+
+.filter-row {
+  display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+  margin: 0 0 1.4rem;
+}
+.filter {
+  flex: 1 1 16rem; font-family: var(--mono); font-size: .82rem;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 0;
+  padding: .55rem .7rem;
+}
+.filter::placeholder { color: var(--muted); }
+.filter:focus { outline: none; border-color: var(--gold); }
+.count { font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+h3.level {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  margin: 2.2rem 0 .5rem; padding-bottom: .4rem; border-bottom: 1px solid var(--ink);
+}
+h3.level:first-of-type { margin-top: 0; }
+
+.cat { border-bottom: 1px solid var(--rule); }
+.cat-row {
+  display: grid; grid-template-columns: 6.5rem minmax(0,1fr) 5.5rem;
+  gap: .15rem 1rem; align-items: baseline;
+  padding: .6rem .4rem; border-bottom: 1px solid var(--rule-soft);
+}
+.cat-row:last-child { border-bottom: 0; }
+a.cat-row { transition: background .15s ease; }
+a.cat-row:hover { background: var(--wash); }
+.cat-row .code { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+a.cat-row:hover .code { color: var(--ink); }
+.cat-row .t { font-size: 1rem; }
+.cat-row .st {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); text-align: right;
+}
+.cat-row.is-draft .t { color: var(--muted); }
+.cat-row.is-hidden { display: none; }
+
+@media (max-width: 640px) {
+  .cat-row { grid-template-columns: minmax(0,1fr) auto; }
+  .cat-row .code { grid-column: 1 / -1; }
+  .cat-row .st { text-align: right; }
+}
+
+/* --- coursework record ----------------------------------------------------- */
+
+.term { display: grid; grid-template-columns: 8rem minmax(0,1fr); gap: 0 var(--gutter); padding: 1.8rem 0; border-top: 1px solid var(--rule); }
+.term:first-child { border-top: 0; padding-top: 0; }
+.term-rail { font-family: var(--mono); }
+.term-rail .y { display: block; font-size: .95rem; }
+.term-rail .w { display: block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .2rem; }
+.mods { list-style: none; margin: 0; padding: 0; }
+.mods li { display: grid; grid-template-columns: 6.5rem minmax(0,1fr); gap: .1rem 1rem; padding: .45rem 0; border-bottom: 1px dotted var(--rule); }
+.mods li:last-child { border-bottom: 0; }
+.mods .code { font-family: var(--mono); font-size: .78rem; color: var(--muted); padding-top: .18rem; }
+.mods .t { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+.mods .who { display: block; color: var(--muted); font-size: .88rem; }
+.mods .aud {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule);
+  padding: .05rem .4rem; white-space: nowrap;
+}
+.mods li.is-aud .t > span:first-child { color: var(--muted); }
+.note {
+  margin: 1rem 0 0; padding: .9rem 1rem; background: var(--rule-soft);
+  font-size: .93rem;
+}
+.note .k { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: .3rem; }
+
+@media (max-width: 860px) { .term { grid-template-columns: 1fr; gap: .8rem; } }
+@media (max-width: 640px) { .mods li { grid-template-columns: 1fr; } .mods .t { flex-direction: column; gap: .1rem; align-items: flex-start; } }
+
+/* --- bibliography ---------------------------------------------------------- */
+
+.bib { list-style: none; margin: 0; padding: 0; }
+.bib li {
+  display: grid; grid-template-columns: 2.4rem minmax(0,1fr);
+  gap: 0 .9rem; padding: 1.4rem 0; border-top: 1px solid var(--rule);
+}
+.bib li:first-child { border-top: 0; padding-top: 0; }
+.bib .n { font-family: var(--mono); font-size: .78rem; color: var(--muted); padding-top: .25rem; }
+.bib .cite { font-size: 1.04rem; }
+.bib .cite .ti { font-style: italic; }
+.bib .cite .au { color: var(--muted); }
+.bib .gloss { margin: .6rem 0 0; font-size: .95rem; color: var(--muted); }
+.bib .gloss em { font-style: italic; }
+@media (max-width: 640px) { .bib li { grid-template-columns: 1fr; gap: .3rem; } }
+
+/* --- colophon -------------------------------------------------------------- */
+
+.colophon { border-top: 1px solid var(--ink); margin-top: 4rem; padding: 2.2rem 0 3.5rem; }
+.colophon-inner {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 2rem; flex-wrap: wrap;
+}
+.colophon .quote { font-family: var(--cm); font-style: italic; font-size: 1.02rem; max-width: 30rem; margin: 0; }
+.colophon .quote .who { display: block; font-style: normal; font-size: .74rem; font-family: var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .5rem; }
+.colophon .meta { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; color: var(--muted); text-align: right; }
+@media (max-width: 640px) { .colophon .meta { text-align: left; } }
+
+/* --- katex ----------------------------------------------------------------- */
+
+.katex { font-size: 1.05em; }
+.katex-display { margin: 1.2rem 0; overflow-x: auto; overflow-y: hidden; padding: .2rem 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* --- utility --------------------------------------------------------------- */
+
+.visually-hidden-h {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="/">Thang Pang Ern<span class="cjk">汤邦恩</span></a>
+    <nav class="toc" aria-label="Sections">
+        <a href="/" aria-current="page"><span class="n">1</span>About</a>
+        <a href="/creatives"><span class="n">2</span>Creatives</a>
+        <a href="/notes"><span class="n">3</span>Notes</a>
+        <a href="/book_recommendations"><span class="n">4</span>Books</a>
+    </nav>
+  </div>
 </div>
 
-<script>
-  (function () {
-    const canvas = document.getElementById("dotCanvas");
-    const ctx = canvas.getContext("2d");
+<main id="main">
+<header class="hero wrap">
+  <p class="eyebrow">National University of Singapore</p>
+  <h1>Thang Pang Ern</h1>
+  <p class="cjk-line">汤邦恩</p>
+  <p class="lede">Mathematics undergraduate. I work in analytic number theory: partitions, theta functions, hypergeometric series, modular forms and modular equations.</p>
+</header>
 
-    const guessInput = document.getElementById("guessInput");
-    const submitGuessBtn = document.getElementById("submitGuess");
-    const newRoundBtn = document.getElementById("newRound");
-    const feedbackEl = document.getElementById("feedback");
-    const statsEl = document.getElementById("stats");
+<div class="wrap">
 
-    let actualCount = 0;
-    let roundsPlayed = 0;
-    let totalAbsError = 0;
+  <figure class="plate plate-lead">
+    <svg class="mfig" id="pfig" viewBox="0 0 660 344" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An animation cycling through the seven partitions of five">
+<g id="pstage" class="stage">
+<text id="ptitle" class="ttl" x="330" y="40" text-anchor="middle">5 = 5</text>
+<g class="mv"><circle class="pt" r="9"/></g>
+<g class="mv"><circle class="pt" r="9"/></g>
+<g class="mv"><circle class="pt" r="9"/></g>
+<g class="mv"><circle class="pt" r="9"/></g>
+<g class="mv"><circle class="pt" r="9"/></g>
+</g>
+<line class="grid" x1="40" y1="252" x2="620" y2="252"/>
+<g class="slot" id="slot0">
+<circle class="pt sm" cx="48.00" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="57.00" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="66.00" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="75.00" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="84.00" cy="288.00" r="3.0"/>
+<text class="lbl" x="66.00" y="326" text-anchor="middle">5</text>
+</g>
+<g class="slot" id="slot1">
+<circle class="pt sm" cx="140.50" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="149.50" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="158.50" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="167.50" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="140.50" cy="292.50" r="3.0"/>
+<text class="lbl" x="154.00" y="326" text-anchor="middle">4+1</text>
+</g>
+<g class="slot" id="slot2">
+<circle class="pt sm" cx="233.00" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="242.00" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="251.00" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="233.00" cy="292.50" r="3.0"/>
+<circle class="pt sm" cx="242.00" cy="292.50" r="3.0"/>
+<text class="lbl" x="242.00" y="326" text-anchor="middle">3+2</text>
+</g>
+<g class="slot" id="slot3">
+<circle class="pt sm" cx="321.00" cy="279.00" r="3.0"/>
+<circle class="pt sm" cx="330.00" cy="279.00" r="3.0"/>
+<circle class="pt sm" cx="339.00" cy="279.00" r="3.0"/>
+<circle class="pt sm" cx="321.00" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="321.00" cy="297.00" r="3.0"/>
+<text class="lbl" x="330.00" y="326" text-anchor="middle">3+1+1</text>
+</g>
+<g class="slot" id="slot4">
+<circle class="pt sm" cx="413.50" cy="279.00" r="3.0"/>
+<circle class="pt sm" cx="422.50" cy="279.00" r="3.0"/>
+<circle class="pt sm" cx="413.50" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="422.50" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="413.50" cy="297.00" r="3.0"/>
+<text class="lbl" x="418.00" y="326" text-anchor="middle">2+2+1</text>
+</g>
+<g class="slot" id="slot5">
+<circle class="pt sm" cx="501.50" cy="274.50" r="3.0"/>
+<circle class="pt sm" cx="510.50" cy="274.50" r="3.0"/>
+<circle class="pt sm" cx="501.50" cy="283.50" r="3.0"/>
+<circle class="pt sm" cx="501.50" cy="292.50" r="3.0"/>
+<circle class="pt sm" cx="501.50" cy="301.50" r="3.0"/>
+<text class="lbl" x="506.00" y="326" text-anchor="middle">2+1+1+1</text>
+</g>
+<g class="slot" id="slot6">
+<circle class="pt sm" cx="594.00" cy="270.00" r="3.0"/>
+<circle class="pt sm" cx="594.00" cy="279.00" r="3.0"/>
+<circle class="pt sm" cx="594.00" cy="288.00" r="3.0"/>
+<circle class="pt sm" cx="594.00" cy="297.00" r="3.0"/>
+<circle class="pt sm" cx="594.00" cy="306.00" r="3.0"/>
+<text class="lbl" x="594.00" y="326" text-anchor="middle">1+1+1+1+1</text>
+</g>
+</svg>
+    <figcaption class="figcap">A <em>partition</em> of \(n\) is a way of writing \(n\) as a sum of positive integers, where the order of the parts does not matter. Five dots can be stacked seven ways, so \(p(5)=7\).</figcaption>
+  </figure>
 
-    const MIN_DOTS = 25;
-    const MAX_DOTS = 120;
-
-    const COLORS = [
-      "#ff6b6b",
-      "#4dabf7",
-      "#51cf66",
-      "#fcc419",
-      "#845ef7",
-      "#f06595"
-    ];
-
-    function randomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function clearCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function randomDotCount() {
-  const r = Math.random();
-
-  // Mix of easy / medium / hard ranges
-  if (r < 0.25) {
-    // easy: visibly countable
-    return randomInt(10, 30);
-  } else if (r < 0.55) {
-    // medium
-    return randomInt(31, 80);
-  } else if (r < 0.8) {
-    // harder
-    return randomInt(81, 140);
-  } else {
-    // very hard
-    return randomInt(141, 220);
-  }
-}
-
-
-    function drawDots() {
-  clearCanvas();
-  actualCount = randomDotCount();  // <--- use new randomness
-
-  for (let i = 0; i < actualCount; i++) {
-    const radius = randomInt(4, 8);
-    const x = randomInt(radius, canvas.width - radius);
-    const y = randomInt(radius, canvas.height - radius);
-    const color = COLORS[randomInt(0, COLORS.length - 1)];
-
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
-    ctx.fillStyle = color;
-    ctx.globalAlpha = 0.9;
-    ctx.fill();
-  }
-  ctx.globalAlpha = 1;
-}
-
-
-    function startNewRound() {
-      drawDots();
-      feedbackEl.textContent = "";
-      guessInput.value = "";
-      guessInput.focus();
-    }
-
-    function handleGuess() {
-      const guess = parseInt(guessInput.value, 10);
-      if (isNaN(guess) || guess <= 0) {
-        feedbackEl.textContent = "Please enter a positive number.";
-        return;
-      }
-
-      const error = Math.abs(guess - actualCount);
-      roundsPlayed++;
-      totalAbsError += error;
-      const avgError = (totalAbsError / roundsPlayed).toFixed(1);
-
-      feedbackEl.innerHTML =
-        `You guessed <strong>${guess}</strong>. ` +
-        `There were <strong>${actualCount}</strong> dots. ` +
-        `Your error this round: <strong>${error}</strong>.`;
-
-      statsEl.innerHTML =
-        `Rounds played: <strong>${roundsPlayed}</strong> &nbsp;|&nbsp; ` +
-        `Average error: <strong>${avgError}</strong>`;
-
-      // Optional: auto-generate a new pattern after checking
-      // startNewRound();
-    }
-
-    submitGuessBtn.addEventListener("click", handleGuess);
-    newRoundBtn.addEventListener("click", startNewRound);
-    guessInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") handleGuess();
-    });
-
-    // Initial round
-    startNewRound();
-  })();
-</script>
-
-
-                </div>
-            </section>
-
-
-        </main>
-
-        <!--===== FOOTER =====-->
-        <footer class="footer">
-            <p class="footer__title">Thang Pang Ern</p>
-            <div class="footer__formula">
-        \[p\left(n\right)\sim \frac{1}{4n\sqrt{3}}\operatorname{exp}\left(\pi\sqrt{\frac{2n}{3}}\right)\]
+  <section class="sec" id="about">
+    <div class="sec-rail"><span class="num">1</span>About</div>
+    <div class="sec-body prose">
+      <h2>About</h2>
+      <figure class="portrait">
+        <img src="/img/profile_pic.png" alt="Thang Pang Ern" loading="lazy" width="400" height="500">
+      </figure>
+      <p>I am a Mathematics undergraduate at the National University of Singapore, and I will spend Fall 2026 at the &Eacute;cole Polytechnique F&eacute;d&eacute;rale de Lausanne on exchange.</p>
+      <p>Inspired by the elegance and depth of pure mathematics, I am drawn to analytic number theory and the interplay between analysis and the properties of the integers. I have been a teaching assistant for <span class="mono">MA2001</span> Linear Algebra I for two semesters, and I write short expository articles for my students alongside the usual duties.</p>
     </div>
-            <div class="footer">
-                <i>'I am interested in Mathematics only as a creative art.'</i> ~ G. H. Hardy
-            </div>
-            <p class="footer__copy">&#169; Bedimcode. All rights reserved.</p>
-        </footer>
+  </section>
 
+  <section class="sec" id="documents">
+    <div class="sec-rail"><span class="num">2</span>Documents</div>
+    <div class="sec-body">
+      <h2>CV and talks attended</h2>
+      <ul class="docs">
+        <li>
+          <a href="/NEW/Thang%20Pang%20Ern%20CV.pdf">
+            <span class="t">Curriculum Vitae</span>
+            <span class="ext">PDF &nearr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="/NEW/List%20of%20Talks%20Attended.pdf">
+            <span class="t">Talks attended</span>
+            <span class="ext">PDF &nearr;</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-        <!--===== SCROLL REVEAL =====-->
-        <script src="https://unpkg.com/scrollreveal"></script>
+  <section class="sec" id="contact">
+    <div class="sec-rail"><span class="num">3</span>Contact</div>
+    <div class="sec-body prose">
+      <h2>Contact</h2>
+      <p>Email is the best way to reach me, and I reply very fast. Remove the <span class="mono">%%%</span> before sending.</p>
+      <p class="addr">
+        <span class="k">Personal</span>therayagrowtopia%%%@%%%gmail.com<br>
+        <span class="k">University</span>thangpangern%%%@%%%u.nus.edu
+      </p>
+      <div class="social">
+        <a href="https://github.com/TheRayaGT/" rel="me noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/thang-pang-ern-85448a167/" rel="me noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/thangpangern" rel="me noopener">Instagram</a>
+      </div>
+    </div>
+  </section>
 
-        <!--===== MAIN JS =====-->
-        <script src="\assets\main.js"></script>
-    </body>
-</html>
+</div>
 
-<script type="text/javascript" charset="utf-8"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML,
-  https://vincenttam.github.io/javascripts/MathJaxLocal.js"></script>
+</main>
 
-  <script>
-  function smoothScroll(event) {
-      event.preventDefault();
-      const targetId = event.target.getAttribute('href').substring(1); // Get the target element ID excluding the #
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-          window.scrollTo({
-              top: targetElement.offsetTop,
-              behavior: 'smooth' // Smooth scroll behavior
-          });
+<footer class="colophon">
+  <div class="wrap colophon-inner">
+    <p class="quote">&lsquo;I am interested in Mathematics only as a creative art.&rsquo;
+      <span class="who">G. H. Hardy</span></p>
+    <div class="meta">
+      &copy; 2026 Thang Pang Ern<br>
+    </div>
+  </div>
+</footer>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});"></script>
+<script>
+(function () {
+  var svg = document.getElementById('pfig');
+  if (!svg) return;
+  var P = [[5], [4, 1], [3, 2], [3, 1, 1], [2, 2, 1], [2, 1, 1, 1], [1, 1, 1, 1, 1]];
+  var dots  = [].slice.call(svg.querySelectorAll('.mv'));
+  var slots = [].slice.call(svg.querySelectorAll('.slot'));
+  var title = document.getElementById('ptitle');
+  var GAP = 36, CX = 330, CY = 152;
+
+  function show(k) {
+    var p = P[k], h = (p.length - 1) * GAP, x0 = CX - (p[0] - 1) * GAP / 2, i = 0;
+    for (var r = 0; r < p.length; r++) {
+      for (var c = 0; c < p[r]; c++) {
+        dots[i++].style.transform =
+          'translate(' + (x0 + c * GAP) + 'px,' + (CY - h / 2 + r * GAP) + 'px)';
       }
-  }
-  function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
+    }
+    title.textContent = '5 = ' + p.join(' + ');
   }
 
-  function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    show(0);
+    slots.forEach(function (s) { s.classList.add('on'); });
+    return;
   }
-  </script>
+
+  var k = 0;
+  function step() {
+    show(k);
+    slots[k].classList.add('on');
+    k += 1;
+    setTimeout(k < P.length ? step : reset, k < P.length ? 1500 : 2400);
+  }
+  function reset() {
+    slots.forEach(function (s) { s.classList.remove('on'); });
+    k = 0;
+    setTimeout(step, 800);
+  }
+  setTimeout(step, 500);
+})();
+</script>
+</body>
+</html>
