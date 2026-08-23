@@ -47,6 +47,10 @@
   --rail: 7rem;
   --gutter: 3rem;
   --measure: 40rem;
+
+  /* hero backdrop */
+  --backdrop: url("/NEW/Dunman_talk.JPG")
+   --backdrop-opacity: .14;
 }
 
 * { box-sizing: border-box; }
@@ -147,6 +151,38 @@ main, .colophon, .masthead { position: relative; }
   font-size: 1.12rem; color: var(--muted);
 }
 .hero .lede em { color: var(--ink); font-style: normal; }
+
+/* --- hero backdrop -------------------------------------------------------
+   The classroom photograph sits behind the top of the page at low opacity,
+   desaturated and masked so it dissolves into the paper before the rules
+   and catalogue begin. It is decoration: no text sits on top of it that
+   depends on it, and it never intercepts pointer events.
+   ------------------------------------------------------------------------ */
+
+main::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: min(30rem, 62vh);
+  background-image: var(--backdrop);
+  background-size: cover;
+  background-position: 50% 45%;
+  background-repeat: no-repeat;
+  filter: saturate(.55) contrast(1.05);
+  opacity: var(--backdrop-opacity);
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom,
+      rgba(0,0,0,.95) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom,
+      rgba(0,0,0,.95) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,0) 100%);
+}
+
+.hero { position: relative; z-index: 1; }
+
+@media (max-width: 640px) {
+  main::before { height: min(22rem, 50vh); --backdrop-opacity: .11; }
+}
 
 /* --- figures: generated mathematics --------------------------------------- */
 
