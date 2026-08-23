@@ -89,6 +89,16 @@ a { color: inherit; text-decoration: none; }
 
 main, .colophon, .masthead { position: relative; }
 
+/* --- ambient field -------------------------------------------------------
+   A fixed layer beneath every word: slow-rising points, roughly one in
+   eight struck in gold. Sits above the body gradient, behind the content.
+   ------------------------------------------------------------------------ */
+
+.bg-dots {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+}
+.bg-dots canvas { display: block; width: 100%; height: 100%; }
+
 /* --- masthead ------------------------------------------------------------ */
 
 .masthead {
@@ -463,6 +473,7 @@ a.cat-row:hover .code { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
+  .bg-dots { display: none; }
 }
 
 /* --- utility --------------------------------------------------------------- */
@@ -476,6 +487,8 @@ a.cat-row:hover .code { color: var(--ink); }
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<div class="bg-dots" aria-hidden="true"><canvas id="dotfield"></canvas></div>
 
 <div class="masthead">
   <div class="masthead-inner">
@@ -674,6 +687,63 @@ a.cat-row:hover .code { color: var(--ink); }
     setTimeout(step, 800);
   }
   setTimeout(step, 500);
+})();
+</script>
+
+<!-- ambient field: slow-rising points behind the text -->
+<script>
+(function () {
+  var canvas = document.getElementById('dotfield');
+  if (!canvas) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var pts = [];
+  var W = 0, H = 0;
+
+  function size() {
+    W = canvas.width  = canvas.clientWidth  * dpr;
+    H = canvas.height = canvas.clientHeight * dpr;
+  }
+
+  function seed() {
+    var n = window.innerWidth < 640 ? 40 : 70;
+    pts.length = 0;
+    for (var i = 0; i < n; i++) {
+      pts.push({
+        x: Math.random(),
+        y: Math.random(),
+        r: Math.random() * 1.5 + 0.6,
+        v: Math.random() * 0.00022 + 0.00008,
+        p: Math.random() * 6.283,
+        gold: Math.random() < 0.13
+      });
+    }
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { size(); seed(); }, 150);
+  });
+
+  size();
+  seed();
+
+  (function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i];
+      p.y -= p.v;
+      if (p.y < -0.03) { p.y = 1.03; p.x = Math.random(); }
+      ctx.beginPath();
+      ctx.arc((p.x + Math.sin(t / 4200 + p.p) * 0.014) * W, p.y * H, p.r * dpr, 0, 6.283);
+      ctx.fillStyle = p.gold ? 'rgba(169, 240, 76, 0.50)' : 'rgba(232, 245, 228, 0.26)';
+      ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  })(0);
 })();
 </script>
 </body>
