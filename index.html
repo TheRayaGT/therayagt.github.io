@@ -16,6 +16,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+/* MathJax typesets the LaTeX in the OEIS section: $...$ inline, \[...\] displayed. */
+window.MathJax = {
+  tex: {
+    inlineMath:  [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+  },
+  chtml: { displayAlign: "left", displayIndent: "1.5em" },
+  startup: { elements: ["#oeis"] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
 <style>
 /* ==========================================================================
    Thang Pang Ern — "Critical line"
@@ -34,7 +46,9 @@
   --line:   #BDB7AA;
   --accent: #B5651D;
 
-  --label: 9rem;   /* width of the column left of the line */
+  /* width of the column left of the line, which is also the portrait's width;
+     it grows on wider screens so the photo can be bigger */
+  --label: clamp(9rem, 20vw, 14rem);
   --gap:   2.5rem; /* space on either side of the line */
   --ease:  cubic-bezier(.2, .7, .2, 1);
 }
@@ -72,7 +86,7 @@ a:hover { color: #000; text-decoration-color: var(--ink); }
 
 /* --- the line ------------------------------------------------------------ */
 
-.page { max-width: 62rem; margin: 0 auto; padding: 2rem 1.5rem 0; }
+.page { max-width: calc(53rem + var(--label)); margin: 0 auto; padding: 2rem 1.5rem 0; }
 
 .row { display: flex; flex-wrap: wrap; column-gap: var(--gap); }
 
@@ -197,6 +211,31 @@ h1 {
 
 .foot { font-size: .875rem; color: var(--muted); padding-bottom: 3rem; }
 
+/* --- OEIS ---------------------------------------------------------------- */
+
+.intro { margin: 0 0 2rem; }
+
+.oeis {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.oeis p { margin: 0; text-wrap: pretty; }
+.oeis .seq {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  margin-bottom: .2rem;
+}
+.oeis .seq a { font-weight: 500; font-variant-numeric: tabular-nums; }
+.oeis .when, .oeis .with { font-size: .875rem; color: var(--muted); }
+.oeis .when { white-space: nowrap; }
+.oeis .prop { margin-top: .45rem; }
+.oeis .tag { color: var(--muted); }
+.oeis .with { margin-top: .35rem; }
+
+.oeis mjx-container[display="true"] {
+  margin: .55rem 0 !important;
+  overflow-x: auto; overflow-y: hidden;
+}
+
 /* label offsets so each label sits level with the first line beside it */
 .label.at-nav   { padding-top: .7rem; }
 .label.at-large { padding-top: .45rem; }
@@ -237,6 +276,24 @@ h1 {
 .hero > .cjk  { animation-delay: calc(var(--t, 0s) + .22s); }
 .hero > .bio  { animation-delay: calc(var(--t, 0s) + .34s); }
 
+/* OEIS entries rise one by one as the line passes them (the list itself stays put) */
+.body > .oeis { animation: none; }
+.oeis > li {
+  animation: rise .8s var(--ease) both;
+  animation-delay: calc(var(--t, 0s) + .1s + var(--k, 0) * .2s);
+}
+.oeis > li:nth-child(2)    { --k: 1; }
+.oeis > li:nth-child(3)    { --k: 2; }
+.oeis > li:nth-child(4)    { --k: 3; }
+.oeis > li:nth-child(5)    { --k: 4; }
+.oeis > li:nth-child(6)    { --k: 5; }
+.oeis > li:nth-child(7)    { --k: 6; }
+.oeis > li:nth-child(8)    { --k: 7; }
+.oeis > li:nth-child(9)    { --k: 8; }
+.oeis > li:nth-child(10)   { --k: 9; }
+.oeis > li:nth-child(11)   { --k: 10; }
+.oeis > li:nth-child(n+12) { --k: 11; }
+
 .portrait { animation: appear 1s var(--ease) .2s both; }
 .social a { animation: rise .7s var(--ease) both; }
 .social a:nth-child(1) { animation-delay: .55s; }
@@ -258,7 +315,7 @@ h1 {
     flex-direction: row; align-items: center; justify-content: flex-start;
     gap: 1rem; padding-bottom: 1.75rem;
   }
-  .portrait { width: 6.5rem; }
+  .portrait { width: 8.5rem; }
   .nav { padding-bottom: 3rem; }
 }
 </style>
@@ -352,9 +409,83 @@ h1 {
       </div>
     </section>
 
+    <!-- Newest first. Math is LaTeX: $...$ inline, \[...\] displayed; write < as &lt;.
+         Each new entry: add about .2s to this row's --d and to the footer's --t. -->
+    <section class="row" style="--t: 1.52s; --d: 2.2s" aria-labelledby="h-oeis">
+      <h2 class="label at-text" id="h-oeis">OEIS</h2>
+      <div class="body" id="oeis">
+        <p class="intro">Contributions to the <a href="https://oeis.org/">Online Encyclopedia of Integer Sequences</a>.</p>
+        <ol class="oeis">
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A028347">A028347</a><span class="when">Oct 2026</span></p>
+            <p>$a(n)=n^2-4$.</p>
+            <p class="prop"><span class="tag">Contributed property:</span> For $n\ge 1$, $a(n+1)$ is the minimum number of non-overlapping rectangular tiles, with sides on grid lines, which can be placed on an $n^2\times n^2$ grid of unit squares so that each row and each column contains exactly one uncovered unit square. The case $n=45$, i.e. $a(46)=2112$, is Problem 6 of the 2025 International Mathematical Olympiad ($2025\times 2025$ grid).</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A396925">A396925</a><span class="when">Aug 2026</span></p>
+            <p>Numbers $k$ which have a divisor $d$ such that $d^2&lt;k$ and $\phi(d)=\phi(k/d)$, where $\phi$ denotes Euler's totient function.</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A195055">A195055</a><span class="when">Jul 2026</span></p>
+            <p>Decimal expansion of $\dfrac{\pi^2}{3}$.</p>
+            <p class="prop"><span class="tag">Contributed property:</span> equals \[\sum_{n=1}^{\infty}\frac{H(n)}{T(n)},\] where $H(n)$ is the $n^{\text{th}}$ harmonic number and $T(n)$ is the $n^{\text{th}}$ triangular number.</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A062119">A062119</a><span class="when">Jul 2026</span></p>
+            <p>$a(n)=n!\,(n-1)$.</p>
+            <p class="prop"><span class="tag">Contributed property:</span> equals \[\left(\sum_{k=1}^{\infty}\prod_{i=1}^{n}\frac{1}{k+i}\right)^{-1}.\]</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A397310">A397310</a><span class="when">Jul 2026</span></p>
+            <p>Decimal expansion of $\displaystyle\int_{0}^{\pi}\cos(\cos x)\;dx$.</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A069998">A069998</a><span class="when">Jul 2026</span></p>
+            <p>Decimal expansion of $\displaystyle\sqrt{\frac{\pi}{2}}$.</p>
+            <p class="prop"><span class="tag">Contributed property:</span> equals $\displaystyle\int_{0}^{\infty}\frac{\sin(x^2)}{x^2}\;dx$.</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A039686">A039686</a><span class="when">May 2026</span></p>
+            <p>Squares which are the concatenation of two nonzero squares.</p>
+            <p class="prop"><span class="tag">Contributed property:</span> the sequence is infinite because it contains $49\cdot 10^{2i}$ for $i\ge 0$ since $(7\cdot 10^i)^2$ can be split into the initial 4 and $9\cdot 10^{2i}$ with square root $3\cdot 10^i$.</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A395338">A395338</a><span class="when">Apr 2026</span></p>
+            <p>Primes whose square is a concatenation of exactly 2 distinct strictly increasing non-zero squares.</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A342316">A342316</a><span class="when">Feb 2026</span></p>
+            <p>Decimal expansion of $\dfrac{\pi}{2}-\log 2$.</p>
+            <p class="prop"><span class="tag">Contributed property:</span> equals \[\int_{1}^{\infty}\log\left(1+\frac{1}{x^2}\right)\;dx.\]</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A392834">A392834</a><span class="when">Jan 2026</span></p>
+            <p>Time taken to get $n$ people from one side of a bridge to the other where (a) the only flashlight must be carried when crossing; (b) at most three people may cross at the same time; (c) a group crosses at the speed of the slowest member; and (d) the $k^{\text{th}}$ person requires $k$ seconds to cross the bridge.</p>
+            <p class="with">With Gerard Sayson</p>
+          </li>
+
+          <li>
+            <p class="seq"><a href="https://oeis.org/A392835">A392835</a><span class="when">Jan 2026</span></p>
+            <p>Number of ordered pairs $(i,j)$ with $1\le i,j\le n$ such that $\gcd(i+j,ij)=\gcd(i,j)$.</p>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
   </main>
 
-  <div class="row" style="--t: 1.52s; --d: .1s">
+  <div class="row" style="--t: 3.72s; --d: .1s">
     <div class="label" aria-hidden="true"></div>
     <footer class="body foot"><span>© 2026 Thang Pang Ern</span></footer>
   </div>
