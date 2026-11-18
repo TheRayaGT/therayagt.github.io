@@ -204,6 +204,9 @@ h1 {
 
 .docs { display: flex; flex-wrap: wrap; gap: 0 2rem; padding-bottom: 3rem; }
 .docs a { padding: .6rem 0; }
+.docs .interview { flex: 0 0 100%; max-width: 34rem; margin-top: .9rem; }
+.docs .interview p { margin: 0; text-wrap: pretty; }
+.docs .interview .links { display: flex; flex-wrap: wrap; gap: 0 2rem; margin-top: .2rem; }
 
 .contact { display: flex; flex-direction: column; gap: .3rem; }
 .contact p { margin: 0; display: flex; align-items: center; gap: .65rem; }
@@ -393,15 +396,22 @@ h1 {
       </ol>
     </section>
 
-    <section class="row" style="--t: 1.21s; --d: .13s" aria-labelledby="h-docs">
+    <section class="row" style="--t: 1.21s; --d: .36s" aria-labelledby="h-docs">
       <h2 class="label at-links" id="h-docs">Documents</h2>
       <div class="body docs">
         <a href="/NEW/Thang%20Pang%20Ern%20CV.pdf">Curriculum Vitae</a>
         <a href="/NEW/List%20of%20Talks%20Attended.pdf">Talks Attended</a>
+        <div class="interview">
+          <p>I was interviewed by Kartik Nayak for <i>GSEO Interviews</i>, a series from the Global Science Engineering Organisation (GSEO) that offers students around the world candid conversations about the stories, setbacks and ideas behind people's achievements.</p>
+          <p class="links">
+            <a href="therayagt.github.io/NEW/GESO_Interview_with_Thang_Pang_Ern.pdf">Transcript</a>
+            <a href="https://youtu.be/W2G3wgOVVDg">Video</a>
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="row" style="--t: 1.34s; --d: .18s" aria-labelledby="h-contact">
+    <section class="row" style="--t: 1.57s; --d: .18s" aria-labelledby="h-contact">
       <h2 class="label at-text" id="h-contact">Contact</h2>
       <div class="body contact">
         <p><i class="fa fa-envelope-o" aria-hidden="true"></i><span>thangpangern at u.nus.edu</span></p>
@@ -411,7 +421,7 @@ h1 {
 
     <!-- Newest first. Math is LaTeX: $...$ inline, \[...\] displayed; write < as &lt;.
          Each new entry: add about .2s to this row's --d and to the footer's --t. -->
-    <section class="row" style="--t: 1.52s; --d: 2.2s" aria-labelledby="h-oeis">
+    <section class="row" style="--t: 1.75s; --d: 2.2s" aria-labelledby="h-oeis">
       <h2 class="label at-text" id="h-oeis">OEIS</h2>
       <div class="body" id="oeis">
         <p class="intro">Contributions to the <a href="https://oeis.org/">Online Encyclopedia of Integer Sequences</a>.</p>
@@ -485,7 +495,7 @@ h1 {
 
   </main>
 
-  <div class="row" style="--t: 3.72s; --d: .1s">
+  <div class="row" style="--t: 3.95s; --d: .1s">
     <div class="label" aria-hidden="true"></div>
     <footer class="body foot"><span>© 2026 Thang Pang Ern</span></footer>
   </div>
