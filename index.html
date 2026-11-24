@@ -86,7 +86,30 @@ a:hover { color: #000; text-decoration-color: var(--ink); }
 
 /* --- the line ------------------------------------------------------------ */
 
-.page { max-width: calc(53rem + var(--label)); margin: 0 auto; padding: 2rem 1.5rem 0; }
+.page { position: relative; max-width: calc(53rem + var(--label)); margin: 0 auto; padding: 2rem 1.5rem 0; }
+
+/* --- easter egg ----------------------------------------------------------
+   Three cards, fanned, in the top right. They sit quiet until hovered, when
+   the fan opens and the pips appear. The link goes to a blackjack table. */
+
+.egg {
+  position: absolute; top: 1.5rem; right: 1rem;
+  display: block; padding: .5rem;
+  line-height: 0;
+  color: var(--line);
+  text-decoration: none;
+  transition: color .3s var(--ease);
+}
+.egg:hover, .egg:focus-visible { color: var(--accent); }
+.egg svg { display: block; width: 34px; height: auto; overflow: visible; }
+.egg rect { fill: var(--paper); stroke: currentColor; stroke-width: 1.5; }
+.egg g { transform-origin: 17px 30px; transition: transform .45s var(--ease); }
+.egg .pip { fill: currentColor; stroke: none; opacity: 0; transition: opacity .3s ease .1s; }
+.egg:hover .l, .egg:focus-visible .l { transform: rotate(-20deg); }
+.egg:hover .r, .egg:focus-visible .r { transform: rotate(20deg); }
+.egg:hover .pip, .egg:focus-visible .pip { opacity: 1; }
+.egg:hover svg, .egg:focus-visible svg { animation: nudge .45s var(--ease); }
+@keyframes nudge { 50% { transform: translateY(-2px); } }
 
 .row { display: flex; flex-wrap: wrap; column-gap: var(--gap); }
 
@@ -320,6 +343,8 @@ h1 {
   }
   .portrait { width: 8.5rem; }
   .nav { padding-bottom: 3rem; }
+  .egg { top: 1.2rem; right: .35rem; }
+  .egg svg { width: 26px; }
 }
 </style>
 </head>
@@ -327,6 +352,17 @@ h1 {
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="page">
+
+  <a class="egg" href="/blackjack.html" aria-label="A game of blackjack" title="Six decks, five tables, no limit">
+    <svg viewBox="0 0 34 38" aria-hidden="true" focusable="false">
+      <g class="l"><rect x="7" y="4" width="20" height="28" rx="2.5"></rect></g>
+      <g class="r"><rect x="7" y="4" width="20" height="28" rx="2.5"></rect></g>
+      <g class="c">
+        <rect x="7" y="4" width="20" height="28" rx="2.5"></rect>
+        <path class="pip" d="M17 10c0 0-5.4 4.6-5.4 7.3a2.7 2.7 0 0 0 4.7 1.9c-.2 1.5-.7 2.4-1.5 3.1h4.4c-.8-.7-1.3-1.6-1.5-3.1a2.7 2.7 0 0 0 4.7-1.9C22.4 14.6 17 10 17 10z"></path>
+      </g>
+    </svg>
+  </a>
 
   <div class="row" style="--t: 0s; --d: .18s">
     <p class="label at-nav">Re(s) = ½</p>
