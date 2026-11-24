@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blackjack, five tables</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --page:#e6e8e1; --ink:#1c211e; --ink-2:#56605a; --line:rgba(28,33,30,.14);
+  --panel:#f4f5f0; --felt:#11533d; --felt-2:#0c4230; --felt-ink:#cfe3d7;
+  --rail:#3a2416; --brass:#c9a44c; --brass-ink:#5a4410;
+  --card:#fbf8f0; --card-red:#b3261e; --card-black:#1b1b1b;
+  --win:#1f7a47; --lose:#a8322b; --push:#6b6f6a;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Libre Caslon Text",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#101412; --ink:#e7ebe6; --ink-2:#9ba59e; --line:rgba(231,235,230,.14);
+    --panel:#181d1a; --felt:#0f4a36; --felt-2:#0a3a2a; --felt-ink:#b9d6c6;
+    --rail:#2b1a10; --win:#5cc58b; --lose:#ef7b72; --push:#a3a8a2;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#101412; --ink:#e7ebe6; --ink-2:#9ba59e; --line:rgba(231,235,230,.14);
+  --panel:#181d1a; --felt:#0f4a36; --felt-2:#0a3a2a; --felt-ink:#b9d6c6;
+  --rail:#2b1a10; --win:#5cc58b; --lose:#ef7b72; --push:#a3a8a2;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.wrap{max-width:1500px;margin:0 auto;padding:20px 18px 40px}
+
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px 32px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.bank .lbl{font-size:13px;color:var(--ink-2)}
+.bank .amt{font-family:var(--serif);font-size:clamp(34px,5vw,52px);line-height:1.05;font-variant-numeric:lining-nums tabular-nums}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px;color:var(--ink-2)}
+.stats b{display:block;font-weight:500;font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+.top .spacer{flex:1}
+.gbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 14px;font-weight:500}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--brass);border-color:var(--brass);color:#2a1f05}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.small{padding:5px 10px;font-size:13px}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--brass);padding:10px 14px;margin:-6px 0 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+.tables{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.table{display:flex;flex-direction:column}
+.felt{position:relative;background:radial-gradient(ellipse at 50% 30%,var(--felt) 0%,var(--felt-2) 100%);border:9px solid var(--rail);border-radius:18px 18px 46% 46% / 18px 18px 22% 22%;padding:12px 14px 34px;min-height:330px;color:var(--felt-ink);display:flex;flex-direction:column}
+.table.turn .felt{box-shadow:0 0 0 3px var(--brass)}
+.fhead{display:flex;justify-content:space-between;align-items:baseline;font-size:12px}
+.fhead .name{font-family:var(--serif);font-size:15px;color:#f1ead2}
+.shoe{display:flex;align-items:center;gap:6px}
+.shoebar{width:54px;height:5px;background:rgba(255,255,255,.14);border-radius:3px;position:relative;overflow:visible}
+.shoebar i{position:absolute;left:0;top:0;bottom:0;background:var(--felt-ink);border-radius:3px}
+.shoebar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:#e5484d}
+.zone{min-height:92px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.zone.dealer{margin-top:6px}
+.tag{font-size:12px;color:var(--felt-ink);font-variant-numeric:tabular-nums;min-height:18px}
+.print{text-align:center;font-family:var(--serif);font-style:italic;font-size:12.5px;color:rgba(241,234,210,.55);margin:6px 0;letter-spacing:.02em}
+.print span{display:block;font-size:10.5px;font-style:normal;letter-spacing:.06em;opacity:.8}
+.hands{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:auto}
+.hand{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 6px;border-radius:10px;border:1px solid transparent}
+.hand.active{border-color:rgba(201,164,76,.8);background:rgba(0,0,0,.12)}
+.cards{display:flex;padding-right:24px}
+.card{width:46px;height:66px;border-radius:6px;background:var(--card);color:var(--card-black);margin-right:-24px;box-shadow:0 1px 2px rgba(0,0,0,.35);position:relative;font-family:var(--serif);font-weight:700;flex:none}
+.card .r{position:absolute;top:3px;left:5px;font-size:15px;line-height:1}
+.card .s{position:absolute;top:19px;left:5px;font-size:13px;line-height:1;font-family:var(--sans)}
+.card .c{position:absolute;right:5px;bottom:3px;font-size:24px;line-height:1;font-family:var(--sans)}
+.card.red{color:var(--card-red)}
+.card.back{background:repeating-linear-gradient(45deg,#7a1f23 0 4px,#8e2a2e 4px 8px);border:3px solid var(--card)}
+.card.new{animation:dealIn .32s cubic-bezier(.2,.8,.3,1) both}
+@keyframes dealIn{from{opacity:0;transform:translate(0,-40px) rotate(-8deg)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.card.new{animation:none}}
+.bet{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-variant-numeric:tabular-nums}
+.chipdot{width:14px;height:14px;border-radius:50%;background:var(--brass);border:2px dashed #fff8;flex:none}
+.res{font-size:12px;font-weight:600;padding:1px 8px;border-radius:10px;background:rgba(0,0,0,.28)}
+.res.w{color:#8fe3b0}.res.l{color:#ffb0a8}.res.p{color:#e2e2dc}
+.note{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);font-size:11.5px;color:#f1ead2;white-space:nowrap;opacity:.8}
+.empty{margin:auto;text-align:center;font-family:var(--serif);font-style:italic;color:rgba(241,234,210,.5);font-size:14px}
+
+.ctrl{background:var(--panel);border:1px solid var(--line);border-top:none;border-radius:0 0 12px 12px;margin:0 18px;padding:12px 12px 14px;min-height:118px}
+.betrow{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.betrow label{font-size:13px;color:var(--ink-2)}
+.betin{flex:1;min-width:0;display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;background:var(--page);padding:0 10px}
+.betin span{color:var(--ink-2)}
+.betin input{border:0;background:transparent;width:100%;padding:7px 4px;font-variant-numeric:tabular-nums;font-weight:500;outline:none}
+.betin:focus-within{border-color:var(--brass)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{width:38px;height:38px;border-radius:50%;border:3px dashed rgba(255,255,255,.85);font-size:11.5px;font-weight:600;display:grid;place-items:center;padding:0;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.chip:hover{transform:translateY(-1px)}
+.c1{background:#e9e6dc;color:#333;border-color:#9a968a}
+.c5{background:#c0392b;color:#fff}
+.c25{background:#1e7a47;color:#fff}
+.c100{background:#222;color:#fff}
+.c500{background:#6a3ea1;color:#fff}
+.c1k{background:#d9b441;color:#3a2a00}
+.acts{display:flex;flex-wrap:wrap;gap:6px}
+.acts .btn{flex:1 1 auto}
+.msg{font-size:13px;color:var(--ink-2);margin:0 0 8px}
+.err{font-size:13px;color:var(--lose);margin:6px 0 0;min-height:0}
+kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 4px;color:var(--ink-2)}
+
+.below{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:28px;margin-top:30px}
+@media (max-width:820px){.below{grid-template-columns:minmax(0,1fr)}}
+.below h2{font-family:var(--serif);font-weight:400;font-size:19px;margin:0 0 8px}
+.log{list-style:none;margin:0;padding:0;font-size:13.5px}
+.log li{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--line)}
+.log .t{color:var(--ink-2);min-width:58px}
+.log .d{flex:1;min-width:0}
+.log .n{font-variant-numeric:tabular-nums;font-weight:500}
+.pos{color:var(--win)}.neg{color:var(--lose)}
+.rules{font-size:13.5px;color:var(--ink-2);max-width:60ch}
+.rules p{margin:0 0 8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="bank"><div class="lbl">Your bank</div><div class="amt" id="bank">$1,000</div></div>
+    <div class="stats" id="stats"></div>
+    <div class="spacer"></div>
+    <div class="gbtns">
+      <button class="btn primary" id="dealAll">Deal all bets</button>
+      <button class="btn" id="resetBtn">Reset bank</button>
+    </div>
+  </header>
+  <div id="notice"></div>
+  <main class="tables" id="tables"></main>
+  <section class="below">
+    <div>
+      <h2>Recent hands</h2>
+      <ul class="log" id="log"></ul>
+    </div>
+    <div class="rules">
+      <h2>House rules</h2>
+      <p>Each table deals from its own six-deck shoe, reshuffled when the cut card comes out (and mid-hand if a shoe ever runs dry).</p>
+      <p>Dealer stands on soft 17 and checks for blackjack with an ace or ten showing. Blackjack pays 3 to 2, insurance pays 2 to 1.</p>
+      <p>Double on any first two cards. Split pairs up to four hands; split aces get one card each. Late surrender returns half your bet.</p>
+      <p>No table limit: bet anything up to what's in your bank. Keys act on the highlighted table: <kbd>H</kbd> hit, <kbd>S</kbd> stand, <kbd>D</kbd> double, <kbd>P</kbd> split, <kbd>R</kbd> surrender, <kbd>I</kbd>/<kbd>N</kbd> insurance, <kbd>Enter</kbd> deal all.</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const START=1000, DECKS=6, NT=5, KEY='bj-five-tables-v1';
+const SUITS=['♠','♥','♦','♣'], RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+let S, uid=0; const seen=new Set();
+
+/* Randomness. Every shuffle draws fresh entropy from the OS through
+   crypto.getRandomValues, so no two shoes repeat and there is no seed to
+   recover. randBelow uses rejection sampling, which keeps each index
+   exactly equally likely; plain `random()*n` is subtly biased. */
+const CR=(typeof crypto!=='undefined'&&crypto.getRandomValues)?crypto:null;
+function randBelow(n){
+  if(n<=1)return 0;
+  if(CR){const lim=Math.floor(4294967296/n)*n,b=new Uint32Array(1);
+    let v;do{CR.getRandomValues(b);v=b[0];}while(v>=lim);return v%n;}
+  return Math.floor(Math.random()*n);
+}
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=randBelow(k+1);[a[k],a[j]]=[a[j],a[k]];}return a;}
+
+const r2=n=>Math.round(n*100)/100;
+const fmt=n=>{n=r2(n);const s=Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});return (n<0?'-$':'$')+s;};
+const sfmt=n=>(n>0?'+':'')+fmt(n);
+
+function freshTable(i){const t={i,shoe:[],cut:0,phase:'bet',betAmt:25,hands:[],dealer:[],holeUp:false,insurance:0,active:0,note:'',err:'',lastNet:null};newShoe(t);t.note='';return t;}
+function fresh(){return{bank:START,stats:{rounds:0,won:0,lost:0,pushed:0,bj:0,net:0,peak:START},log:[],tables:Array.from({length:NT},(_,i)=>freshTable(i)),uid:0};}
+function save(){try{S.uid=uid;localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&Array.isArray(d.tables)&&d.tables.length===NT&&typeof d.bank==='number')return d;}}catch(e){}return null;}
+
+function newShoe(t){t.shoe=[];for(let d=0;d<DECKS;d++)for(const s of SUITS)for(const r of RANKS)t.shoe.push({r,s,id:++uid});
+  shuffle(t.shoe);shuffle(t.shoe);
+  t.cut=Math.floor(DECKS*52*0.2)+randBelow(Math.floor(DECKS*52*0.08));t.note='Fresh shoe shuffled';}
+function draw(t){if(!t.shoe.length){newShoe(t);t.note='Shoe ran dry, reshuffled mid-hand';}return t.shoe.pop();}
+const cv=c=>c.r==='A'?11:(['J','Q','K','10'].includes(c.r)?10:+c.r);
+function hv(cards){let tot=0,a=0;for(const c of cards){tot+=cv(c);if(c.r==='A')a++;}while(tot>21&&a){tot-=10;a--;}return{tot,soft:a>0};}
+const isBJ=(t,h)=>t.hands.length===1&&h.cards.length===2&&hv(h.cards).tot===21;
+
+function deal(i,fromAll){const t=S.tables[i];if(t.phase!=='bet')return false;t.err='';
+  const b=r2(+t.betAmt);
+  if(!(b>0)){if(!fromAll){t.err='Enter a bet above $0 first.';render();}return false;}
+  if(b>S.bank+1e-9){t.err=`Your bank has ${fmt(S.bank)}. Lower this bet to deal.`;render();return false;}
+  S.bank=r2(S.bank-b);
+  t.note='';if(t.shoe.length<=t.cut)newShoe(t);
+  t.hands=[{cards:[],bet:b,done:false,doubled:false,surr:false,splitAces:false,result:null,pay:0}];
+  t.dealer=[];t.holeUp=false;t.insurance=0;t.active=0;t.lastNet=null;
+  const h=t.hands[0];h.cards.push(draw(t));t.dealer.push(draw(t));h.cards.push(draw(t));t.dealer.push(draw(t));
+  if(t.dealer[0].r==='A')t.phase='insurance';else peek(t);
+  save();if(!fromAll)render();return true;}
+
+function insure(i,take){const t=S.tables[i];if(t.phase!=='insurance')return;const cost=r2(t.hands[0].bet/2);
+  if(take){if(cost>S.bank+1e-9){t.err=`Insurance costs ${fmt(cost)}, more than your bank.`;render();return;}S.bank=r2(S.bank-cost);t.insurance=cost;}
+  t.err='';peek(t);save();render();}
+
+function peek(t){const dBJ=hv(t.dealer).tot===21;const h=t.hands[0];
+  if(dBJ){t.holeUp=true;h.done=true;settle(t);return;}
+  if(hv(h.cards).tot===21){h.done=true;t.holeUp=true;settle(t);return;}
+  t.phase='play';t.active=0;}
+
+function cur(t){return t.hands[t.active];}
+function canDouble(t){const h=cur(t);return h&&h.cards.length===2&&!h.splitAces&&S.bank>=h.bet-1e-9;}
+function canSplit(t){const h=cur(t);return h&&h.cards.length===2&&cv(h.cards[0])===cv(h.cards[1])&&t.hands.length<4&&!h.splitAces&&S.bank>=h.bet-1e-9;}
+function canSurr(t){const h=cur(t);return h&&t.hands.length===1&&h.cards.length===2;}
+
+function act(i,a){const t=S.tables[i];if(t.phase!=='play')return;const h=cur(t);if(!h)return;t.err='';
+  if(a==='hit'){h.cards.push(draw(t));const v=hv(h.cards).tot;if(v>=21)h.done=true;}
+  else if(a==='stand'){h.done=true;}
+  else if(a==='double'){if(!canDouble(t))return;S.bank=r2(S.bank-h.bet);h.bet=r2(h.bet*2);h.doubled=true;h.cards.push(draw(t));h.done=true;}
+  else if(a==='split'){if(!canSplit(t))return;S.bank=r2(S.bank-h.bet);const aces=h.cards[0].r==='A';
+    const nh={cards:[h.cards.pop()],bet:h.bet,done:false,doubled:false,surr:false,splitAces:aces,result:null,pay:0};
+    h.splitAces=aces;h.cards.push(draw(t));nh.cards.push(draw(t));t.hands.splice(t.active+1,0,nh);
+    for(const x of [h,nh]){if(aces||hv(x.cards).tot===21)x.done=true;}}
+  else if(a==='surrender'){if(!canSurr(t))return;h.surr=true;h.done=true;}
+  advance(t);save();render();}
+
+function advance(t){while(t.active<t.hands.length&&t.hands[t.active].done)t.active++;if(t.active>=t.hands.length)dealerTurn(t);}
+function dealerTurn(t){t.holeUp=true;const live=t.hands.some(h=>!h.surr&&hv(h.cards).tot<=21);
+  if(live){while(hv(t.dealer).tot<17)t.dealer.push(draw(t));}settle(t);}
+
+function settle(t){t.holeUp=true;const dv=hv(t.dealer).tot,dBJ=t.dealer.length===2&&dv===21;let ret=0,staked=0;const st=S.stats;
+  for(const h of t.hands){staked+=h.bet;const v=hv(h.cards).tot,pBJ=isBJ(t,h);let pay,res;
+    if(h.surr){pay=h.bet/2;res='Surrendered';}
+    else if(v>21){pay=0;res='Bust';}
+    else if(pBJ&&!dBJ){pay=h.bet*2.5;res='Blackjack';st.bj++;}
+    else if(pBJ&&dBJ){pay=h.bet;res='Push';}
+    else if(dBJ){pay=0;res='Dealer blackjack';}
+    else if(dv>21){pay=h.bet*2;res='Dealer busts';}
+    else if(v>dv){pay=h.bet*2;res='Win';}
+    else if(v<dv){pay=0;res='Lose';}
+    else{pay=h.bet;res='Push';}
+    h.pay=r2(pay);h.result=res;ret+=h.pay;
+    if(h.pay>h.bet+1e-9)st.won++;else if(Math.abs(h.pay-h.bet)<1e-9)st.pushed++;else st.lost++;}
+  let insNote='';
+  if(t.insurance){staked+=t.insurance;if(dBJ){ret+=t.insurance*3;insNote=', insurance paid';}else insNote=', insurance lost';}
+  S.bank=r2(S.bank+ret);const net=r2(ret-staked);t.lastNet=net;st.net=r2(st.net+net);st.rounds++;st.peak=Math.max(st.peak,S.bank);
+  const desc=t.hands.map(h=>`${h.result} (${hv(h.cards).tot>21?'bust':hv(h.cards).tot})`).join(', ')+` vs dealer ${dBJ?'blackjack':(dv>21?'bust '+dv:dv)}`+insNote;
+  S.log.unshift({tb:t.i+1,net,desc});S.log=S.log.slice(0,14);t.phase='bet';}
+
+function dealAll(){let n=0,blocked=0;for(const t of S.tables){if(t.phase!=='bet'||!(+t.betAmt>0))continue;if(deal(t.i,true))n++;else blocked++;}
+  if(!n&&!blocked){S.tables.forEach(t=>{if(t.phase==='bet')t.err='';});S.tables[0].err='Set a bet on at least one table.';}
+  save();render();}
+function setBet(i,v){const t=S.tables[i];v=r2(Math.max(0,v));t.betAmt=v;t.err='';save();render();}
+function resetBank(){if(S.tables.some(t=>t.phase!=='bet')&&!confirm('Hands are in progress. Reset anyway? Their bets will be lost.'))return;
+  const keepBets=S.tables.map(t=>t.betAmt);S=fresh();S.tables.forEach((t,k)=>t.betAmt=keepBets[k]>0?keepBets[k]:25);save();seen.clear();render();}
+
+function cardHTML(c,faceUp,delay){const key=faceUp?c.id:c.id+'b';const isNew=!seen.has(key);seen.add(key);
+  const cls=['card'];if(!faceUp)cls.push('back');else if(c.s==='♥'||c.s==='♦')cls.push('red');if(isNew)cls.push('new');
+  const st=isNew?` style="animation-delay:${delay}ms"`:'';
+  return faceUp?`<div class="${cls.join(' ')}"${st} aria-label="${c.r} of ${c.s}"><span class="r">${c.r}</span><span class="s">${c.s}</span><span class="c">${c.s}</span></div>`
+               :`<div class="${cls.join(' ')}"${st} aria-label="Face-down card"></div>`;}
+function valTag(cards){if(!cards.length)return'';const {tot,soft}=hv(cards);return tot>21?`Bust, ${tot}`:(soft&&tot<21?`Soft ${tot}`:`${tot}`);}
+
+function turnTable(){return S.tables.find(t=>t.phase==='play'||t.phase==='insurance');}
+
+function render(){
+  document.getElementById('bank').textContent=fmt(S.bank);
+  const st=S.stats;
+  document.getElementById('stats').innerHTML=
+   `<div>Session<b class="${st.net>0?'pos':st.net<0?'neg':''}">${sfmt(st.net)}</b></div>`+
+   `<div>Rounds<b>${st.rounds}</b></div><div>Won, lost, pushed<b>${st.won}, ${st.lost}, ${st.pushed}</b></div>`+
+   `<div>Blackjacks<b>${st.bj}</b></div><div>Peak bank<b>${fmt(st.peak)}</b></div>`;
+  const inPlay=S.tables.some(t=>t.phase!=='bet');
+  document.getElementById('notice').innerHTML=(S.bank<0.01&&!inPlay)?`<div class="notice"><span>Your bank is empty. Reset it to $1,000 to keep playing.</span><button class="btn small primary" onclick="resetBank()">Reset bank</button></div>`:'';
+  const tt=turnTable();let delay=0;
+  document.getElementById('tables').innerHTML=S.tables.map(t=>{delay=0;
+    const left=t.shoe.length,total=DECKS*52;
+    const dealerCards=t.dealer.map((c,k)=>cardHTML(c,k!==1||t.holeUp,(delay+=110))).join('');
+    const dTag=t.dealer.length?(t.holeUp?valTag(t.dealer):`Showing ${valTag([t.dealer[0]])}`):'';
+    let handsHTML='';
+    if(t.hands.length){handsHTML=t.hands.map((h,k)=>{const active=t.phase==='play'&&k===t.active;
+      let res='';if(h.result){const n=r2(h.pay-h.bet);res=`<span class="res ${n>0?'w':n<0?'l':'p'}">${h.result} ${n?sfmt(n):''}</span>`;}
+      return `<div class="hand${active?' active':''}"><div class="cards">${h.cards.map(c=>cardHTML(c,true,(delay+=110))).join('')}</div>
+        <div class="tag">${valTag(h.cards)}${isBJ(t,h)?', blackjack':''}</div>
+        <div class="bet"><span class="chipdot"></span>${fmt(h.bet)}${h.doubled?' doubled':''}</div>${res}</div>`;}).join('');}
+    else handsHTML=`<div class="empty">Place a bet to take a seat</div>`;
+    let ctrl='';
+    if(t.phase==='bet'){
+      ctrl=`${t.lastNet!==null?`<p class="msg">Last round <b class="${t.lastNet>0?'pos':t.lastNet<0?'neg':''}">${sfmt(t.lastNet)}</b>${t.insurance?'':''}</p>`:''}
+      <div class="betrow"><label for="bet${t.i}">Bet</label><div class="betin"><span>$</span><input id="bet${t.i}" type="number" min="0" step="1" inputmode="decimal" value="${t.betAmt||''}" placeholder="0" onchange="setBet(${t.i},+this.value||0)" onkeydown="if(event.key==='Enter'){setBet(${t.i},+this.value||0);deal(${t.i});event.stopPropagation();}"></div>
+      <button class="btn primary" onclick="deal(${t.i})">Deal</button></div>
+      <div class="chips">
+        <button class="chip c1" onclick="setBet(${t.i},${+t.betAmt||0}+1)" aria-label="Add $1">1</button>
+        <button class="chip c5" onclick="setBet(${t.i},${+t.betAmt||0}+5)" aria-label="Add $5">5</button>
+        <button class="chip c25" onclick="setBet(${t.i},${+t.betAmt||0}+25)" aria-label="Add $25">25</button>
+        <button class="chip c100" onclick="setBet(${t.i},${+t.betAmt||0}+100)" aria-label="Add $100">100</button>
+        <button class="chip c500" onclick="setBet(${t.i},${+t.betAmt||0}+500)" aria-label="Add $500">500</button>
+        <button class="chip c1k" onclick="setBet(${t.i},${+t.betAmt||0}+1000)" aria-label="Add $1,000">1K</button>
+        <button class="btn small" onclick="setBet(${t.i},${(+t.betAmt||0)*2})">Double bet</button>
+        <button class="btn small" onclick="setBet(${t.i},S.bank)">All in</button>
+        <button class="btn small" onclick="setBet(${t.i},0)">Clear</button>
+      </div>`;
+    } else if(t.phase==='insurance'){
+      const cost=r2(t.hands[0].bet/2);
+      ctrl=`<p class="msg">Dealer shows an ace. Take insurance for ${fmt(cost)}? It pays 2 to 1 if the dealer has blackjack.</p>
+      <div class="acts"><button class="btn primary" onclick="insure(${t.i},true)">Take insurance</button><button class="btn" onclick="insure(${t.i},false)">No insurance</button></div>`;
+    } else {
+      const h=cur(t);
+      ctrl=`<p class="msg">${t.hands.length>1?`Hand ${t.active+1} of ${t.hands.length}: `:''}${valTag(h.cards)}. Your move.</p>
+      <div class="acts"><button class="btn primary" onclick="act(${t.i},'hit')">Hit</button><button class="btn" onclick="act(${t.i},'stand')">Stand</button>
+      ${canDouble(t)?`<button class="btn" onclick="act(${t.i},'double')">Double</button>`:''}
+      ${canSplit(t)?`<button class="btn" onclick="act(${t.i},'split')">Split</button>`:''}
+      ${canSurr(t)?`<button class="btn" onclick="act(${t.i},'surrender')">Surrender</button>`:''}</div>`;
+    }
+    if(t.err)ctrl+=`<p class="err" role="alert">${t.err}</p>`;
+    return `<section class="table${tt===t?' turn':''}" aria-label="Table ${t.i+1}">
+      <div class="felt">
+        <div class="fhead"><span class="name">Table ${t.i+1}</span>
+          <span class="shoe" title="Cards left in the shoe; red mark is the cut card">${left} cards <span class="shoebar"><i style="width:${left/total*100}%"></i><u style="left:${t.cut/total*100}%"></u></span></span></div>
+        <div class="zone dealer"><div class="cards">${dealerCards}</div><div class="tag">${dTag?'Dealer '+dTag.toLowerCase():''}</div></div>
+        <div class="print">Blackjack pays 3 to 2<span>Dealer stands on soft 17</span></div>
+        <div class="hands">${handsHTML}</div>
+        ${t.note?`<div class="note">${t.note}</div>`:''}
+      </div>
+      <div class="ctrl">${ctrl}</div></section>`;
+  }).join('');
+  document.getElementById('log').innerHTML=S.log.length?S.log.map(l=>`<li><span class="t">Table ${l.tb}</span><span class="d">${l.desc}</span><span class="n ${l.net>0?'pos':l.net<0?'neg':''}">${sfmt(l.net)}</span></li>`).join(''):'<li><span class="d" style="color:var(--ink-2)">Finished hands show up here.</span></li>';
+}
+
+document.getElementById('dealAll').onclick=dealAll;
+document.getElementById('resetBtn').onclick=resetBank;
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.metaKey||e.ctrlKey||e.altKey)return;
+  const t=turnTable(),k=e.key.toLowerCase();
+  if(!t){if(k==='enter'){e.preventDefault();dealAll();}return;}
+  if(t.phase==='insurance'){if(k==='i')insure(t.i,true);else if(k==='n')insure(t.i,false);return;}
+  const map={h:'hit',s:'stand',d:'double',p:'split',r:'surrender'};if(map[k]){e.preventDefault();act(t.i,map[k]);}
+});
+
+const loaded=load();
+if(loaded){S=loaded;uid=loaded.uid||0;
+  for(const t of S.tables){t.shoe.forEach(c=>uid=Math.max(uid,c.id));
+    t.dealer.forEach(c=>{seen.add(c.id);seen.add(c.id+'b');});
+    t.hands.forEach(h=>h.cards.forEach(c=>seen.add(c.id)));
+    /* a reload must never replay the same card order, so any shoe not in
+       the middle of a hand is shuffled again before the next deal */
+    if(t.phase==='bet')shuffle(t.shoe);
+    t.note='';t.err='';}}
+else S=fresh();
+render();
+</script>
+</body>
+</html>
